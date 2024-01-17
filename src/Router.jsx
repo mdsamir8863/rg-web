@@ -1,13 +1,19 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
 // import Login from "./app/screens/startup/Login";
 // import Registration from "./app/screens/startup/Registration";
 import PreLoader from "./app/screens/startup/PreLoader";
 import { useEffect, useState } from "react";
-import Frames from "./app/screens/startup/Frames";
-import Login from "./app/screens/startup/Login";
-import Reg1 from "./app/screens/registrations/Reg1";
-import StudentForm from "./app/screens/registrations/StudentForm";
+import Loader from "./app/components/Loader";
+const Frames = lazy(() => import("./app/screens/startup/Frames"));
+const Login = lazy(() => import("./app/screens/startup/Login"));
+const Reg1 = lazy(() => import("./app/screens/registrations/Reg1"));
+const InstituteForm = lazy(() => import("./app/screens/registrations/InstituteForm"));
+const StudentForm = lazy(() =>
+  import("./app/screens/registrations/StudentForm")
+);
+const NotFound = lazy(() => import("./app/screens/404/NotFound"));
 // import Nav from "./app/components/Nav";
 const Routing = () => {
   const [preLoading, setPreLoading] = useState(true);
@@ -27,17 +33,21 @@ const Routing = () => {
         {preLoading ? (
           <PreLoader />
         ) : (
-          <Routes>
-            <Route path="/" element={<Navigate to={"/home"} />} />
-            <Route path="/home" element={<Frames />} />
-            <Route path="/login" element={<Login />} />
-            {/* <Route path="/registration" element={<Registration />} /> */}
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/" element={<Navigate to={"/home"} />} />
+              <Route path="/home" element={<Frames />} />
+              <Route path="/login" element={<Login />} />
+              {/* <Route path="/registration" element={<Registration />} /> */}
 
-            {/* testing comp */}
-            {/* <Route path="/register" element={<Registration />} /> */}
-            <Route path="/register" element={<Reg1 />} />
-            <Route path="/register/student" element={<StudentForm />} />
-          </Routes>
+              {/* testing comp */}
+              {/* <Route path="/register" element={<Registration />} /> */}
+              <Route path="/register" element={<Reg1 />} />
+              <Route path="/register/student" element={<StudentForm />} />
+              <Route path="/register/institution" element={<InstituteForm />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         )}
         {/* <PreLoader /> */}
       </BrowserRouter>
