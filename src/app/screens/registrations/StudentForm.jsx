@@ -1,16 +1,17 @@
 import { useState } from "react";
 import Logo from "../../components/RgLogo";
+import axios from "axios";
 
-const StudentForm = () => {
+const StudentForm = ({ setLoading }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     s_number: "",
     p_number: "",
-    address: "",
+    address: {},
     board: "",
-    class: "",
+    class_name: "",
   });
 
   const [classes, set_calsses] = useState([]);
@@ -88,6 +89,48 @@ const StudentForm = () => {
     "11_12/1ST_2ND_PU Delhi - Directorate of Education, Delhi - State Board",
     "11_12/1ST_2ND_PU Puducherry - PBOSHE - State Board",
   ];
+
+  const handleLocationTrigger = () => {
+   try {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          var lat = position.coords.latitude;
+          var lon = position.coords.longitude;
+
+          console.log("Latitude: " + lat + ", Longitude: " + lon);
+          setLoading(true);
+          const URI = `/api/v1/location?lat=${lat}&lon=${lon}`;
+          axios
+            .get(URI)
+            .then((res) => {
+              console.log(res);
+              const { data } = res;
+              if (data?.data) {
+                const address = data?.data;
+                setFormData((prev) => ({ ...prev, address: address?.address }));
+              }
+            })
+            .catch((err) => {
+              alert(err?.message || err);
+            })
+            .finally(() => {
+              setLoading(false);
+            });
+        },
+        function (error) {
+          console.error("Error getting location: " + error.message);
+          alert("Error getting location: " + error.message);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+      alert("Geolocation is not supported by this browser.");
+    }
+   } catch (error) {
+      alert(error)
+   }
+  };
 
   const class_data = {
     KG_CBSE: [
@@ -357,6 +400,20 @@ const StudentForm = () => {
     AL: ["all"],
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(!formData.address?.pincode || !formData.class_name ){
+      alert('please fill the information properly');
+      return;
+    }
+    console.log(formData);
+  };
+
   return (
     <section className="py-5 ">
       <div className="ml-5">
@@ -379,7 +436,10 @@ const StudentForm = () => {
           />
         </svg>
       </div>
-      <form className=" w-3/4 mt-4 p-5 rounded-md bg-white shadow-xl border mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className=" w-3/4 mt-4 p-5 rounded-md bg-white shadow-xl border mx-auto"
+      >
         <span className="my-5 text-blue-900 flex font-bold gap-3">
           <span>Main Details</span>
           <svg
@@ -401,14 +461,15 @@ const StudentForm = () => {
           <div className="relative z-0 w-full mb-5 group">
             <input
               type="text"
-              name="floating_phone"
-              id="floating_phone"
+              name="name"
+              onChange={handleChange}
+              id="floating_name"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
+              placeholder=""
               required
             />
             <label
-              htmlFor="floating_phone"
+              htmlFor="floating_name"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               Full name
@@ -418,14 +479,15 @@ const StudentForm = () => {
           <div className="relative z-0 w-full mb-5 group">
             <input
               type="email"
-              name="floating_phone"
-              id="floating_phone"
+              name="email"
+              onChange={handleChange}
+              id="floating_email"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
             />
             <label
-              htmlFor="floating_phone"
+              htmlFor="floating_email"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               Email
@@ -437,7 +499,8 @@ const StudentForm = () => {
           <div className="relative z-0 w-full mb-5 group">
             <input
               type="number"
-              name="floating_phone"
+              name="p_number"
+              onChange={handleChange}
               id="floating_phone"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
@@ -453,15 +516,15 @@ const StudentForm = () => {
 
           <div className="relative z-0 w-full mb-5 group">
             <input
-              type="number"
-              name="floating_phone"
-              id="floating_phone"
+              name="s_number"
+              onChange={handleChange}
+              id="floating_s_number"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
             />
             <label
-              htmlFor="floating_phone"
+              htmlFor="floating_s_number"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               secondary number (123-456-7890)
@@ -472,44 +535,70 @@ const StudentForm = () => {
           <div className="relative z-0 w-full mb-5 group">
             <input
               type="password"
-              name="floating_phone"
-              id="floating_phone"
+              name="password"
+              onChange={handleChange}
+              id="floating_phone_pass"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
             />
             <label
-              htmlFor="floating_phone"
+              htmlFor="floating_phone_pass"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               password
             </label>
           </div>
-          <button
-            type="button"
-            className=" gap-4 text-blue-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
+          {!formData.address?.city ? (
+            <button
+              onClick={handleLocationTrigger}
+              type="button"
+              className=" gap-4 text-blue-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-              />
-            </svg>
-            Add location for best in your location
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+              Add location for best in your location
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="focus:outline-none text-white transition-all opacity-1 bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 flex justify-start items-center gap-5 dark:hover:bg-green-700 dark:focus:ring-green-800"
+              style={{ transitionDuration: '2s' }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                />
+              </svg>
+              Added successfully
+            </button>
+          )}
         </div>
 
         <span className="my-5 flex text-blue-900 font-bold gap-3">
@@ -531,24 +620,28 @@ const StudentForm = () => {
         </span>
         <div>
           <label
-            htmlFor="countries"
+            htmlFor="education"
             className="block mb-2 text-sm font-medium text-gray-900 .text-white"
           >
             Education
           </label>
           <select
-            id="countries"
+          required
+            id="education"
             onChange={(e) => {
               set_calsses(class_data[e.target.value]);
               set_education(e.target.value);
               const selectedIndex = e.target.selectedIndex;
               const selectedOptionText = e.target.options[selectedIndex].text;
               set_board(selectedOptionText);
+              setFormData((prev) => ({
+                ...prev,
+                board: e.target.options[selectedIndex].text,
+              }));
             }}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 .bg-gray-700 .border-gray-600 .placeholder-gray-400 .text-white .focus:ring-blue-500 .focus:border-blue-500"
           >
             <option selected>Choose a education</option>
-            <option value="ALL">ALL</option>
             <option value="KG_CBSE">KG/ 1 to 10 (CBSE)</option>
             <option value="KG_ICSE">KG/ 1 to 10 (ICSE)</option>
             <option value="PU_CBSE">11-12 / 1st/2nd PUC(CBSE)</option>
@@ -583,9 +676,17 @@ const StudentForm = () => {
             </label>
             <select
               id="countries"
-              onChange={(e) => set_classs(e.target.value)}
+              onChange={(e) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  class_name: e.target.value,
+                }));
+                set_classs(e.target.value);
+              }}
+              required
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 .bg-gray-700 .border-gray-600 .placeholder-gray-400 .text-white .focus:ring-blue-500 .focus:border-blue-500"
             >
+                    <option selected>Choose a class</option>
               {classes?.map((e, i) => (
                 <option key={i} value={e}>
                   {e}

@@ -17,6 +17,7 @@ const NotFound = lazy(() => import("./app/screens/404/NotFound"));
 // import Nav from "./app/components/Nav";
 const Routing = () => {
   const [preLoading, setPreLoading] = useState(true);
+  const [loading,setLoading] = useState(false)
 
   useEffect(() => {
     // Simulate a delay for demonstration purposes
@@ -30,6 +31,9 @@ const Routing = () => {
   return (
     <>
       <BrowserRouter>
+
+    {loading?  <Loader/> : ''}
+
         {preLoading ? (
           <PreLoader />
         ) : (
@@ -43,7 +47,7 @@ const Routing = () => {
               {/* testing comp */}
               {/* <Route path="/register" element={<Registration />} /> */}
               <Route path="/register" element={<Reg1 />} />
-              <Route path="/register/student" element={<StudentForm />} />
+              <Route path="/register/student" element={<StudentForm setLoading={setLoading} />} />
               <Route path="/register/institution" element={<InstituteForm />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
