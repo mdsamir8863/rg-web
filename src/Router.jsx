@@ -48,7 +48,7 @@ const Routing = () => {
               {/* <Route path="/register" element={<Registration />} /> */}
               <Route path="/register" element={<Reg1 />} />
               <Route path="/register/student" element={<StudentForm setLoading={setLoading} />} />
-              <Route path="/register/institution" element={<InstituteForm />} />
+              <Route path="/register/institution" element={<InstituteForm setLoading={setLoading}/>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

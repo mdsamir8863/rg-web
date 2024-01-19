@@ -1,6 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import Logo from "../../components/RgLogo";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const StudentForm = ({ setLoading }) => {
   const [formData, setFormData] = useState({
@@ -13,6 +16,7 @@ const StudentForm = ({ setLoading }) => {
     board: "",
     class_name: "",
   });
+  const dispatch = useDispatch();
 
   const [classes, set_calsses] = useState([]);
   const [education, set_education] = useState("");
@@ -91,45 +95,48 @@ const StudentForm = ({ setLoading }) => {
   ];
 
   const handleLocationTrigger = () => {
-   try {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          var lat = position.coords.latitude;
-          var lon = position.coords.longitude;
+    try {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
 
-          console.log("Latitude: " + lat + ", Longitude: " + lon);
-          setLoading(true);
-          const URI = `/api/v1/location?lat=${lat}&lon=${lon}`;
-          axios
-            .get(URI)
-            .then((res) => {
-              console.log(res);
-              const { data } = res;
-              if (data?.data) {
-                const address = data?.data;
-                setFormData((prev) => ({ ...prev, address: address?.address }));
-              }
-            })
-            .catch((err) => {
-              alert(err?.message || err);
-            })
-            .finally(() => {
-              setLoading(false);
-            });
-        },
-        function (error) {
-          console.error("Error getting location: " + error.message);
-          alert("Error getting location: " + error.message);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-      alert("Geolocation is not supported by this browser.");
+            console.log("Latitude: " + lat + ", Longitude: " + lon);
+            setLoading(true);
+            const URI = `/api/v1/location?lat=${lat}&lon=${lon}`;
+            axios
+              .get(URI)
+              .then((res) => {
+                console.log(res);
+                const { data } = res;
+                if (data?.data) {
+                  const address = data?.data;
+                  setFormData((prev) => ({
+                    ...prev,
+                    address: address?.address,
+                  }));
+                }
+              })
+              .catch((err) => {
+                alert(err?.message || err);
+              })
+              .finally(() => {
+                setLoading(false);
+              });
+          },
+          function (error) {
+            console.error("Error getting location: " + error.message);
+            alert("Error getting location: " + error.message);
+          }
+        );
+      } else {
+        console.error("Geolocation is not supported by this browser.");
+        alert("Geolocation is not supported by this browser.");
+      }
+    } catch (error) {
+      alert(error);
     }
-   } catch (error) {
-      alert(error)
-   }
   };
 
   const class_data = {
@@ -407,11 +414,36 @@ const StudentForm = ({ setLoading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!formData.address?.pincode || !formData.class_name ){
-      alert('please fill the information properly');
+    console.log(formData.address)
+    if (!formData.address?.postcode || !formData.class_name) {
+      alert("please fill the information properly");
       return;
     }
-    console.log(formData);
+
+    const {
+      address,
+      board,
+      class_name,
+      email,
+      name,
+      p_number,
+      password,
+      s_number,
+    } = formData;
+    const signData = {
+      name,
+      email,
+      password,
+      role: "student",
+      user_data: {
+        class_name,
+        board,
+        s_number,
+        p_number,
+        address,
+      },
+    };
+    console.log(signData);
   };
 
   return (
@@ -580,7 +612,7 @@ const StudentForm = ({ setLoading }) => {
             <button
               type="button"
               className="focus:outline-none text-white transition-all opacity-1 bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 flex justify-start items-center gap-5 dark:hover:bg-green-700 dark:focus:ring-green-800"
-              style={{ transitionDuration: '2s' }}
+              style={{ transitionDuration: "2s" }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -626,7 +658,7 @@ const StudentForm = ({ setLoading }) => {
             Education
           </label>
           <select
-          required
+            required
             id="education"
             onChange={(e) => {
               set_calsses(class_data[e.target.value]);
@@ -686,7 +718,7 @@ const StudentForm = ({ setLoading }) => {
               required
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 .bg-gray-700 .border-gray-600 .placeholder-gray-400 .text-white .focus:ring-blue-500 .focus:border-blue-500"
             >
-                    <option selected>Choose a class</option>
+              <option selected>Choose a class</option>
               {classes?.map((e, i) => (
                 <option key={i} value={e}>
                   {e}
