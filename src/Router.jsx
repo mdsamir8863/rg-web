@@ -9,15 +9,21 @@ import Loader from "./app/components/Loader";
 const Frames = lazy(() => import("./app/screens/startup/Frames"));
 const Login = lazy(() => import("./app/screens/startup/Login"));
 const Reg1 = lazy(() => import("./app/screens/registrations/Reg1"));
-const InstituteForm = lazy(() => import("./app/screens/registrations/InstituteForm"));
+const InstituteForm = lazy(() =>
+  import("./app/screens/registrations/InstituteForm")
+);
+const TeacherForm = lazy(() =>
+  import("./app/screens/registrations/TeacherForm")
+);
 const StudentForm = lazy(() =>
   import("./app/screens/registrations/StudentForm")
 );
+const SeekerForm = lazy(() => import("./app/screens/registrations/SeekerForm"));
 const NotFound = lazy(() => import("./app/screens/404/NotFound"));
 // import Nav from "./app/components/Nav";
 const Routing = () => {
   const [preLoading, setPreLoading] = useState(true);
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Simulate a delay for demonstration purposes
@@ -31,8 +37,7 @@ const Routing = () => {
   return (
     <>
       <BrowserRouter>
-
-    {loading?  <Loader/> : ''}
+        {loading ? <Loader /> : ""}
 
         {preLoading ? (
           <PreLoader />
@@ -47,8 +52,22 @@ const Routing = () => {
               {/* testing comp */}
               {/* <Route path="/register" element={<Registration />} /> */}
               <Route path="/register" element={<Reg1 />} />
-              <Route path="/register/student" element={<StudentForm setLoading={setLoading} />} />
-              <Route path="/register/institution" element={<InstituteForm setLoading={setLoading}/>} />
+              <Route
+                path="/register/student"
+                element={<StudentForm setLoading={setLoading} />}
+              />
+              <Route
+                path="/register/institution"
+                element={<InstituteForm setLoading={setLoading} />}
+              />
+              <Route
+                path="/register/teacher"
+                element={<TeacherForm setLoading={setLoading} />}
+              />
+              <Route
+                path="/register/jobSeeker"
+                element={<SeekerForm setLoading={setLoading} />}
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

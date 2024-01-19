@@ -54,7 +54,7 @@ const Reg1 = () => {
         </Link>
         <Link
           className="relative inline-flex w-full items-center justify-center rounded-md font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
-          to={"register/jobSeeker"}
+          to={"/register/jobSeeker"}
         >
           <button
             type="button"
