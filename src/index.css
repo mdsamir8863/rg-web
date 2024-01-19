@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.fadingEffect {
+    animation: fading .5s ease-in-out;
+    transition: .5s ease-in-out;
+}
+
+.fadingout{
+    animation: fadingout .5s ease-in-out;
+    transition: .5s ease-in-out;
+
+}
+
+@keyframes fading {
+
+    from {
+        opacity: .2;
+        /* transform: scale(.5); */
+    }
+
+    to {
+        opacity: 1;
+        /* transform: scale(1); */
+
+    }
+}
+
+@keyframes fadingout {
+
+    from {
+        opacity: 1;
+  
+    }
+
+    to {
+        opacity: 0;
+
+    }
+}
