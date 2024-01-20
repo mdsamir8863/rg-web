@@ -4,6 +4,7 @@ import { useState } from "react";
 import Logo from "../../components/RgLogo";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { signUP } from "../../../store/action";
 
 const StudentForm = ({ setLoading }) => {
   const [formData, setFormData] = useState({
@@ -445,6 +446,7 @@ const StudentForm = ({ setLoading }) => {
       },
     };
     console.log(signData);
+    dispatch(signUP(signData,"student"));
   };
 
   return (
