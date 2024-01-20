@@ -42,11 +42,11 @@ export const fetch_me = () => async (dispatch) => {
   }
 };
 
-export const signUP = () => async (dispatch) => {
+export const signUP = (postData,role) => async (dispatch) => {
   try {
-    const API = api + "/admin";
+    const API = api + `/new/${role}`;
     dispatch({ type: "loading_start" });
-    const { data } = await axios.get(API, { headers: { token } });
+    const { data } = await axios.post(API, postData, { headers: { token } });
     if (data?.data) {
       dispatch({ type: "user_success", payload: data.data });
     }
