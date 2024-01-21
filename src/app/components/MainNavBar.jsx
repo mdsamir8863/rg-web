@@ -25,15 +25,17 @@ const NavBar = () => {
   const isDesktop = windowWidth > 768;
 
   return (
-    <div>
-      {isDesktop ? (
-        // Render DeskNav for desktop
-        <DeskNav />
-      ) : (
-        // Render MbNav for mobile
-        <MbNav />
-      )}
-    </div>
+    <>
+      <div className="w-full">
+        {isDesktop ? (
+          // Render DeskNav for desktop
+          <DeskNav />
+        ) : (
+          // Render MbNav for mobile
+          <MbNav />
+        )}
+      </div>
+    </>
   );
 };
 

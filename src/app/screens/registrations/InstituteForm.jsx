@@ -115,7 +115,7 @@ const StudentForm = ({ setLoading }) => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className=" w-3/4 mt-4 p-5 rounded-md bg-white shadow-xl border mx-auto"
+        className="w-full md:w-3/4 mt-4 p-5 rounded-md bg-white shadow-xl border mx-auto"
       >
         <span className="my-5 text-blue-900 flex font-bold gap-3">
           <span>Main Details</span>

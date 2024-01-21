@@ -1,6 +1,8 @@
 import { useState } from "react";
 import AvatarSelector from "../../Avatars"; // Assume you have an AvatarSelector component
 import { Link } from "react-router-dom";
+import bgTop from "../../assets/bg-designs/homBgTop.png";
+
 const MyProfilePage = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [showAvatarSelector, setShowAvatarSelector] = useState(false);
@@ -15,11 +17,11 @@ const MyProfilePage = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center h-fit gap-28 sm:gap-0 sm:h-screen w-full">
       {/* Top section with background image */}
       <div
-        className="bg-cover bg-center h-48 flex items-center justify-center relative"
-        style={{ background: "linear-gradient( #8B5CF6, #F3F4F6" }}
+        className="bg-cover bg-no-repeat w-full bg-center h-[11rem]  sm:h-[15rem] flex items-center justify-evenly relative"
+        style={{ backgroundImage: `url(${bgTop})` }}
       >
         {/* Profile picture and AvatarSelector */}
         <div className="relative top-20">
@@ -57,8 +59,8 @@ const MyProfilePage = () => {
       </div>
 
       {/* Buttons section */}
-      <div className="flex flex-col items-center justify-center mt-16 gap-3 border w-[95%] md:w-3/4 m-auto p-2">
-        <Link className="flex gap-3 items-center border py-2 px-5 rounded hover:bg-purple-300">
+      <div className="flex flex-col items-center justify-center gap-3 border w-[95%] md:w-3/4 m-auto p-2">
+        <Link className="flex gap-3 w-full sm:w-3/4 items-center border py-2 px-5 rounded hover:bg-purple-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -75,7 +77,7 @@ const MyProfilePage = () => {
           </svg>
           View Exam Results
         </Link>
-        <Link className="flex gap-3 items-center border py-2 px-5 rounded hover:bg-purple-300">
+        <Link className="flex gap-3 w-full sm:w-3/4 items-center border py-2 px-5 rounded hover:bg-purple-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -87,44 +89,10 @@ const MyProfilePage = () => {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
+              d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
             />
           </svg>
-          View Exam Results
-        </Link>
-        <Link className="flex gap-3 items-center border py-2 px-5 rounded hover:bg-purple-300">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
-            />
-          </svg>
-          View Exam Results
-        </Link>
-        <Link className="flex gap-3 items-center border py-2 px-5 rounded hover:bg-purple-300">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
-            />
-          </svg>
-          View Exam Results
+          Log Out
         </Link>
       </div>
 
