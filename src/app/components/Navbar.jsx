@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Logo from "../assets/RG-logo2.png";
-
 const Navbar = () => {
   const [activeTab, setActiveTab] = useState("home");
 
@@ -559,7 +558,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="custom w-full sm:px-3 flex justify-center h-14  z-40   items-center  shadow-2xl phone:bg-transparent text-black ">
+      <nav className="custom w-full sm:px-3 flex justify-center h-16 backdrop-blur-sm  z-40  items-center  shadow-xl phone:bg-transparent text-black ">
         <div className="w-full phone:hidden flex items-center justify-between">
           <img className="h-fit w-16" src={Logo} alt="Company Logo" />
 
@@ -598,7 +597,7 @@ const Navbar = () => {
           ))}
         </div>
       </nav>
-      <div className="h-14 hidden sm:block"></div>
+      <div className="h-16 hidden sm:block"></div>
     </>
   );
 };
