@@ -31,10 +31,11 @@ export const fetch_me = () => async (dispatch) => {
     const API = api + "/user";
     dispatch({ type: "user_request" });
     const { data } = await axios.get(API, { headers: { token } });
+    console.log(data)
     if (data?.data) {
       dispatch({ type: "user_success", payload: data.data });
+      // data?.token ? localStorage.setItem("token", data?.token) : "";
     }
-    data?.token ? localStorage.setItem("token", data?.token) : "";
   } catch (error) {
     console.log(error);
     console.log("actions err>>>", error?.response?.data?.message);
@@ -47,10 +48,11 @@ export const signUP = (postData,role) => async (dispatch) => {
     const API = api + `/new/${role}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.post(API, postData, { headers: { token } });
-    if (data?.data) {
-      dispatch({ type: "user_success", payload: data.data });
+    console.log(data)
+    if (data?.user) {
+      dispatch({ type: "user_success", payload: data.user });
+      data?.token ? localStorage.setItem("token", data?.token) : "";
     }
-    data?.token ? localStorage.setItem("token", data?.token) : "";
   } catch (error) {
     console.log(error);
     console.log("actions err>>>", error?.response?.data?.message);

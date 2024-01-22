@@ -24,55 +24,50 @@ const SeekerForm = lazy(() => import("./app/screens/registrations/SeekerForm"));
 const NotFound = lazy(() => import("./app/screens/404/NotFound"));
 
 // student import
-import StudentHome from "./app/screens/home/StudentHome";
-import S_Notifi from "./app/screens/student/Notifi";
-import S_Market from "./app/screens/student/Market";
-import S_Games from "./app/screens/student/Games";
-import S_Profile from "./app/screens/student/Profile";
+const StudentHome = lazy(() => import("./app/screens/home/StudentHome"));
+const S_Notifi = lazy(() => import("./app/screens/student/Notifi"));
+const S_Market = lazy(() => import("./app/screens/student/Market"));
+const S_Games = lazy(() => import("./app/screens/student/Games"));
+const S_Profile = lazy(() => import("./app/screens/student/Profile"));
 
 // Teacher import
-import TeacherHome from "./app/screens/home/TeacherHome";
-import Tea_Notifi from "./app/screens/teacher/Notifi";
-import Tea_Market from "./app/screens/teacher/Market";
-import Tea_Post from "./app/screens/teacher/Post";
-import Tea_Profile from "./app/screens/teacher/Profile";
+const TeacherHome = lazy(() => import("./app/screens/home/TeacherHome"));
+const Tea_Notifi = lazy(() => import("./app/screens/teacher/Notifi"));
+const Tea_Market = lazy(() => import("./app/screens/teacher/Market"));
+const Tea_Post = lazy(() => import("./app/screens/teacher/Post"));
+const Tea_Profile = lazy(() => import("./app/screens/teacher/Profile"));
 
 // institute import
-import InstituteHome from "./app/screens/home/InstituteHome";
-import Ins_Notifi from "./app/screens/institute/Notifi";
-import Ins_Leads from "./app/screens/institute/Leads";
-import Ins_Post from "./app/screens/institute/Post";
-import Ins_Profile from "./app/screens/institute/Profile";
+const InstituteHome = lazy(() => import("./app/screens/home/InstituteHome"));
+const Ins_Notifi = lazy(() => import("./app/screens/institute/Notifi"));
+const Ins_Leads = lazy(() => import("./app/screens/institute/Leads"));
+const Ins_Post = lazy(() => import("./app/screens/institute/Post"));
+const Ins_Profile = lazy(() => import("./app/screens/institute/Profile"));
 
 // hr import
-import RecruiterHome from "./app/screens/home/RecruiterHome";
-import Hr_Notifi from "./app/screens/hr/Notifi";
-import Hr_Market from "./app/screens/hr/Market";
-import Hr_Post from "./app/screens/hr/Post";
-import Hr_Profile from "./app/screens/hr/Profile";
+const RecruiterHome = lazy(() => import("./app/screens/home/RecruiterHome"));
+const Hr_Notifi = lazy(() => import("./app/screens/hr/Notifi"));
+const Hr_Market = lazy(() => import("./app/screens/hr/Market"));
+const Hr_Post = lazy(() => import("./app/screens/hr/Post"));
+const Hr_Profile = lazy(() => import("./app/screens/hr/Profile"));
 
 // job seeker import
-import JobSeekerHome from "./app/screens/home/JobSeekerHome";
-import J_Notifi from "./app/screens/jobSeeker/Notifi";
-import J_Market from "./app/screens/jobSeeker/Market";
-import J_Jobs from "./app/screens/jobSeeker/Jobs";
-import J_Profile from "./app/screens/jobSeeker/Profile";
+const JobSeekerHome = lazy(() => import("./app/screens/home/JobSeekerHome"));
+const J_Notifi = lazy(() => import("./app/screens/jobSeeker/Notifi"));
+const J_Market = lazy(() => import("./app/screens/jobSeeker/Market"));
+const J_Jobs = lazy(() => import("./app/screens/jobSeeker/Jobs"));
+const J_Profile = lazy(() => import("./app/screens/jobSeeker/Profile"));
+
 import { useDispatch, useSelector } from "react-redux";
+import { toast, Toaster } from "react-hot-toast";
+import { fetch_me } from "./store/action";
 
 const Routing = () => {
-  const user = useSelector((e) => e.user_reducer);
+  const { user, error } = useSelector((e) => e.user_reducer);
   const [preLoading, setPreLoading] = useState(true);
   const [loadingComponent, setLoading] = useState(false);
   const { loading } = useSelector((e) => e.loading_reducer);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log(user);
-    if (user?.error) {
-      toast.error(user?.error);
-      dispatch({ type: "clear_error" });
-    }
-  }, [dispatch, user]);
 
   useEffect(() => {
     // Simulate a delay for demonstration purposes
@@ -83,85 +78,371 @@ const Routing = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    dispatch(fetch_me());
+  }, []);
+
+  useEffect(() => {
+    console.log(error);
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clear_error" });
+    }
+  }, [dispatch, user, error]);
+
   return (
     <>
       <BrowserRouter>
-        {loading ? <Loader /> : ""}
-        <Navbar />
+        <div>
+          <Toaster />
+        </div>
+        {loading || loadingComponent ? <Loader /> : ""}
+        {preLoading ? <PreLoader /> : ""}
+        {!preLoading && user ? <Navbar user={user} /> : ""}
+
         {/* <div className="h-10 w-full flex"></div> */}
-        {preLoading ? (
-          <PreLoader />
-        ) : (
-          <Suspense fallback={<Loader />}>
-            <Routes>
-              <Route path="/" element={<Navigate to={"/home"} />} />
-              <Route path="/home" element={<Frames />} />
-              <Route path="/login" element={<Login />} />
-              {/* <Route path="/registration" element={<Registration />} /> */}
 
-              {/* testing comp */}
-              {/* <Route path="/home/profile" element={<MyProfilePage />} /> */}
-              <Route path="/register" element={<Reg1 />} />
-              <Route
-                path="/register/student"
-                element={<StudentForm setLoading={setLoading} />}
-              />
-              <Route
-                path="/register/institution"
-                element={<InstituteForm setLoading={setLoading} />}
-              />
-              <Route
-                path="/register/teacher"
-                element={<TeacherForm setLoading={setLoading} />}
-              />
-              <Route
-                path="/register/jobSeeker"
-                element={<SeekerForm setLoading={setLoading} />}
-              />
-              <Route
-                path="/register/hr"
-                element={<HrForm setLoading={setLoading} />}
-              />
-              <Route path="*" element={<NotFound />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Reg1 />} />
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<Navigate to={"/home"} />} />
+            <Route
+              path="/home"
+              element={
+                user ? <Navigate to={`/${user.role}/home`} /> : <Frames />
+              }
+            />
+            <Route
+              path="/login"
+              element={user ? <Navigate to={"/home"} /> : <Login />}
+            />
+            {/* <Route path="/registration" element={<Registration />} /> */}
 
-              {/* Student screens */}
-              <Route path="/student/home" element={<StudentHome />} />
-              <Route path="/student/notification" element={<S_Notifi />} />
-              <Route path="/student/market" element={<S_Market />} />
-              <Route path="/student/games" element={<S_Games />} />
-              <Route path="/student/profile" element={<S_Profile />} />
+            {/* testing comp */}
+            {/* <Route path="/home/profile" element={<MyProfilePage />} /> */}
+            <Route
+              path="/register"
+              element={user ? <Navigate to={"/home"} /> : <Reg1 />}
+            />
+            <Route
+              path="/register/student"
+              element={
+                user ? (
+                  <Navigate to={"/home"} />
+                ) : (
+                  <StudentForm setLoading={setLoading} />
+                )
+              }
+            />
+            <Route
+              path="/register/institution"
+              element={
+                user ? (
+                  <Navigate to={"/home"} />
+                ) : (
+                  <InstituteForm setLoading={setLoading} />
+                )
+              }
+            />
+            <Route
+              path="/register/teacher"
+              element={
+                user ? (
+                  <Navigate to={"/home"} />
+                ) : (
+                  <TeacherForm setLoading={setLoading} />
+                )
+              }
+            />
+            <Route
+              path="/register/jobSeeker"
+              element={
+                user ? (
+                  <Navigate to={"/home"} />
+                ) : (
+                  <SeekerForm setLoading={setLoading} />
+                )
+              }
+            />
+            <Route
+              path="/register/hr"
+              element={
+                user ? (
+                  <Navigate to={"/home"} />
+                ) : (
+                  <HrForm setLoading={setLoading} />
+                )
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+            <Route
+              path="/login"
+              element={user ? <Navigate to={"/home"} /> : <Login />}
+            />
+            <Route
+              path="/register"
+              element={user ? <Navigate to={"/home"} /> : <Reg1 />}
+            />
 
-              {/* Teacher screens */}
-              <Route path="/teacher/home" element={<TeacherHome />} />
-              <Route path="/teacher/notification" element={<Tea_Notifi />} />
-              <Route path="/teacher/market" element={<Tea_Market />} />
-              <Route path="/teacher/course" element={<Tea_Post />} />
-              <Route path="/teacher/profile" element={<Tea_Profile />} />
-              {/* Institute screens */}
-              <Route path="/institute/home" element={<InstituteHome />} />
-              <Route path="/institute/notification" element={<Ins_Notifi />} />
-              <Route path="/institute/market" element={<Ins_Leads />} />
-              <Route path="/institute/games" element={<Ins_Post />} />
-              <Route path="/institute/profile" element={<Ins_Profile />} />
+            {/* Student screens */}
+            <Route
+              path="/student/home"
+              element={
+                user && user.role === "student" ? (
+                  <StudentHome />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/student/notification"
+              element={
+                user && user.role === "student" ? (
+                  <S_Notifi />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/student/market"
+              element={
+                user && user.role === "student" ? (
+                  <S_Market />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/student/games"
+              element={
+                user && user.role === "student" ? (
+                  <S_Games />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/student/profile"
+              element={
+                user && user.role === "student" ? (
+                  <S_Profile />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
 
-              {/* Hr screens */}
-              <Route path="/hr/home" element={<RecruiterHome />} />
-              <Route path="/hr/notification" element={<Hr_Notifi />} />
-              <Route path="/hr/market" element={<Hr_Market />} />
-              <Route path="/hr/games" element={<Hr_Post />} />
-              <Route path="/hr/profile" element={<Hr_Profile />} />
+            {/* Teacher screens */}
+            <Route
+              path="/teacher/home"
+              element={
+                user && user.role === "teacher" ? (
+                  <TeacherHome />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/teacher/notification"
+              element={
+                user && user.role === "teacher" ? (
+                  <Tea_Notifi />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/teacher/market"
+              element={
+                user && user.role === "teacher" ? (
+                  <Tea_Market />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/teacher/course"
+              element={
+                user && user.role === "teacher" ? (
+                  <Tea_Post />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/teacher/profile"
+              element={
+                user && user.role === "teacher" ? (
+                  <Tea_Profile />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            {/* Institute screens */}
+            <Route
+              path="/institute/home"
+              element={
+                user && user.role === "institute" ? (
+                  <InstituteHome />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/institute/notification"
+              element={
+                user && user.role === "institute" ? (
+                  <Ins_Notifi />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/institute/market"
+              element={
+                user && user.role === "institute" ? (
+                  <Ins_Leads />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/institute/games"
+              element={
+                user && user.role === "institute" ? (
+                  <Ins_Post />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/institute/profile"
+              element={
+                user && user.role === "institute" ? (
+                  <Ins_Profile />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
 
-              {/* Job seeker screens */}
-              <Route path="/jobseeker/home" element={<JobSeekerHome />} />
-              <Route path="/jobseeker/notification" element={<J_Notifi />} />
-              <Route path="/jobseeker/market" element={<J_Market />} />
-              <Route path="/jobseeker/games" element={<J_Jobs />} />
-              <Route path="/jobseeker/profile" element={<J_Profile />} />
-            </Routes>
-          </Suspense>
-        )}
+            {/* Hr screens */}
+            <Route
+              path="/hr/home"
+              element={
+                user && user.role === "hr" ? (
+                  <RecruiterHome />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/hr/notification"
+              element={
+                user && user.role === "hr" ? (
+                  <Hr_Notifi />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/hr/market"
+              element={
+                user && user.role === "hr" ? (
+                  <Hr_Market />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/hr/games"
+              element={
+                user && user.role === "hr" ? (
+                  <Hr_Post />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/hr/profile"
+              element={
+                user && user.role === "hr" ? (
+                  <Hr_Profile />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+
+            {/* Job seeker screens */}
+            <Route
+              path="/jobseeker/home"
+              element={
+                user && user.role === "seeker" ? (
+                  <JobSeekerHome />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/jobseeker/notification"
+              element={
+                user && user.role === "seeker" ? (
+                  <J_Notifi />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/jobseeker/market"
+              element={
+                user && user.role === "seeker" ? (
+                  <J_Market />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/jobseeker/games"
+              element={
+                user && user.role === "seeker" ? (
+                  <J_Jobs />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/jobseeker/profile"
+              element={
+                user && user.role === "seeker" ? (
+                  <J_Profile />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+          </Routes>
+        </Suspense>
         {/* <PreLoader /> */}
       </BrowserRouter>
     </>

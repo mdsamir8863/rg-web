@@ -4,7 +4,8 @@
 import { Link } from "react-router-dom";
 import RgLogo from "../../assets/RG-logo2.png";
 const Login = () => {
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     // Implement your login logic here based on the selected type
     console.log(`Logging in`);
   };
@@ -25,7 +26,7 @@ const Login = () => {
             <p className="mt-2 text-sm text-gray-600">
               Don&#x27;t have an account?{" "}
               <Link
-                to={'/register'}
+                to={"/register"}
                 title=""
                 className="font-semibold text-black transition-all duration-200 hover:underline"
               >
@@ -88,10 +89,8 @@ const Login = () => {
                 </div>
               </div>
             </form>
-           
           </div>
         </div>
-       
       </div>
     </section>
   );

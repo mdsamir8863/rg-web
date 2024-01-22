@@ -39,34 +39,46 @@ const StudentHome = () => {
             <div className="flex items-center justify-evenly w-full gap-4">
               <div className="relative">
                 <img src={BookBg} alt="" />
-                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">Hindi</p>
+                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">
+                  Hindi
+                </p>
                 <p className="text-center text-[#8B8B8B] text-sm mt-1">Hindi</p>
               </div>
               <div className="relative">
                 <img src={BookBg} alt="" />
-                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">Hindi</p>
+                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">
+                  Hindi
+                </p>
                 <p className="text-center text-[#8B8B8B] text-sm mt-1">Hindi</p>
               </div>
               <div className="relative">
                 <img src={BookBg} alt="" />
-                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">Hindi</p>
+                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">
+                  Hindi
+                </p>
                 <p className="text-center text-[#8B8B8B] text-sm mt-1">Hindi</p>
               </div>
             </div>
             <div className="flex items-center justify-evenly w-full gap-4">
               <div className="relative">
                 <img src={BookBg} alt="" />
-                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">Hindi</p>
+                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">
+                  Hindi
+                </p>
                 <p className="text-center text-[#8B8B8B] text-sm mt-1">Hindi</p>
               </div>
               <div className="relative">
                 <img src={BookBg} alt="" />
-                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">Hindi</p>
+                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">
+                  Hindi
+                </p>
                 <p className="text-center text-[#8B8B8B] text-sm mt-1">Hindi</p>
               </div>
               <div className="relative">
                 <img src={BookBg} alt="" />
-                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">Hindi</p>
+                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">
+                  Hindi
+                </p>
                 <p className="text-center text-[#8B8B8B] text-sm mt-1">Hindi</p>
               </div>
             </div>
@@ -83,21 +95,26 @@ const StudentHome = () => {
             <div className="flex items-center justify-evenly w-full gap-4">
               <div className="relative">
                 <img src={BookBg} alt="" />
-                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">Hindi</p>
+                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">
+                  Hindi
+                </p>
                 <p className="text-center text-[#8B8B8B] text-sm mt-1">Hindi</p>
               </div>
               <div className="relative">
                 <img src={BookBg} alt="" />
-                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">Hindi</p>
+                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">
+                  Hindi
+                </p>
                 <p className="text-center text-[#8B8B8B] text-sm mt-1">Hindi</p>
               </div>
               <div className="relative">
                 <img src={BookBg} alt="" />
-                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">Hindi</p>
+                <p className="absolute top-9 z-10 left-10 font-semibold text-sm">
+                  Hindi
+                </p>
                 <p className="text-center text-[#8B8B8B] text-sm mt-1">Hindi</p>
               </div>
             </div>
-          
           </div>
         </div>
       </div>
