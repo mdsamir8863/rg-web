@@ -1,5 +1,8 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
+
+// import Login from "./app/screens/startup/Login";
+// import Registration from "./app/screens/startup/Registration";
 import PreLoader from "./app/screens/startup/PreLoader";
 import { useEffect, useState } from "react";
 import Loader from "./app/components/Loader";
@@ -10,9 +13,14 @@ const Reg1 = lazy(() => import("./app/screens/registrations/Reg1"));
 const InstituteForm = lazy(() =>
   import("./app/screens/registrations/InstituteForm")
 );
+const TeacherForm = lazy(() =>
+  import("./app/screens/registrations/TeacherForm")
+);
 const StudentForm = lazy(() =>
   import("./app/screens/registrations/StudentForm")
 );
+const HrForm = lazy(() => import("./app/screens/registrations/HrForm"));
+const SeekerForm = lazy(() => import("./app/screens/registrations/SeekerForm"));
 const NotFound = lazy(() => import("./app/screens/404/NotFound"));
 
 // student import
@@ -24,10 +32,10 @@ import S_Profile from "./app/screens/student/Profile";
 
 // Teacher import
 import TeacherHome from "./app/screens/home/TeacherHome";
-import Tea_Notifi from "./app/screens/student/Notifi";
-import Tea_Market from "./app/screens/student/Market";
-import Tea_Games from "./app/screens/student/Games";
-import Tea_Profile from "./app/screens/student/Profile";
+import Tea_Notifi from "./app/screens/teacher/Notifi";
+import Tea_Market from "./app/screens/teacher/Market";
+import Tea_Post from "./app/screens/teacher/Post";
+import Tea_Profile from "./app/screens/teacher/Profile";
 
 // institute import
 import InstituteHome from "./app/screens/home/InstituteHome";
@@ -49,10 +57,22 @@ import J_Notifi from "./app/screens/jobSeeker/Notifi";
 import J_Market from "./app/screens/jobSeeker/Market";
 import J_Jobs from "./app/screens/jobSeeker/Jobs";
 import J_Profile from "./app/screens/jobSeeker/Profile";
+import { useDispatch, useSelector } from "react-redux";
 
 const Routing = () => {
+  const user = useSelector((e) => e.user_reducer);
   const [preLoading, setPreLoading] = useState(true);
-  const [loading, setLoading] = useState(false);
+  const [loadingComponent, setLoading] = useState(false);
+  const { loading } = useSelector((e) => e.loading_reducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(user);
+    if (user?.error) {
+      toast.error(user?.error);
+      dispatch({ type: "clear_error" });
+    }
+  }, [dispatch, user]);
 
   useEffect(() => {
     // Simulate a delay for demonstration purposes
@@ -66,17 +86,22 @@ const Routing = () => {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
         {loading ? <Loader /> : ""}
-
+        <Navbar />
         {/* <div className="h-10 w-full flex"></div> */}
         {preLoading ? (
           <PreLoader />
         ) : (
           <Suspense fallback={<Loader />}>
             <Routes>
-              <Route path="/" element={<Navigate to={"/welcome"} />} />
-              <Route path="/welcome" element={<Frames />} />
+              <Route path="/" element={<Navigate to={"/home"} />} />
+              <Route path="/home" element={<Frames />} />
+              <Route path="/login" element={<Login />} />
+              {/* <Route path="/registration" element={<Registration />} /> */}
+
+              {/* testing comp */}
+              {/* <Route path="/home/profile" element={<MyProfilePage />} /> */}
+              <Route path="/register" element={<Reg1 />} />
               <Route
                 path="/register/student"
                 element={<StudentForm setLoading={setLoading} />}
@@ -84,6 +109,18 @@ const Routing = () => {
               <Route
                 path="/register/institution"
                 element={<InstituteForm setLoading={setLoading} />}
+              />
+              <Route
+                path="/register/teacher"
+                element={<TeacherForm setLoading={setLoading} />}
+              />
+              <Route
+                path="/register/jobSeeker"
+                element={<SeekerForm setLoading={setLoading} />}
+              />
+              <Route
+                path="/register/hr"
+                element={<HrForm setLoading={setLoading} />}
               />
               <Route path="*" element={<NotFound />} />
               <Route path="/login" element={<Login />} />
@@ -100,7 +137,7 @@ const Routing = () => {
               <Route path="/teacher/home" element={<TeacherHome />} />
               <Route path="/teacher/notification" element={<Tea_Notifi />} />
               <Route path="/teacher/market" element={<Tea_Market />} />
-              <Route path="/teacher/games" element={<Tea_Games />} />
+              <Route path="/teacher/course" element={<Tea_Post />} />
               <Route path="/teacher/profile" element={<Tea_Profile />} />
               {/* Institute screens */}
               <Route path="/institute/home" element={<InstituteHome />} />

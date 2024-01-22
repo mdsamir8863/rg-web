@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AvatarSelector from "../../Avatars"; // Assume you have an AvatarSelector component
+import AvatarSelector from "../../AvatarSelector"; // Assume you have an AvatarSelector component
 import { Link } from "react-router-dom";
 import bgTop from "../../assets/bg-designs/homBgTop.png";
 

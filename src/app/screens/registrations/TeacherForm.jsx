@@ -13,7 +13,7 @@ const StudentForm = ({ setLoading }) => {
     s_number: "",
     p_number: "",
     address: {},
-    pincodes: "",
+    institution: "",
   });
   const dispatch = useDispatch();
   const handleLocationTrigger = () => {
@@ -74,15 +74,15 @@ const StudentForm = ({ setLoading }) => {
       return;
     }
 
-    const { address, email, name, p_number, password, s_number, pincodes } =
+    const { address, email, name, p_number, password, s_number, institution } =
       formData;
     const signData = {
       name,
       email,
       password,
-      role: "institute",
+      role: "teacher",
       user_data: {
-        pincodes,
+        institution,
         s_number,
         p_number,
         address,
@@ -97,7 +97,7 @@ const StudentForm = ({ setLoading }) => {
         <Logo />
       </div>
       <div className="flex mt-4 pl-5 text-xl items-end font-bold text-gray-700">
-        <span>Fill the Institution sign up form</span>
+        <span>Fill the Teacher sign up form</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -115,7 +115,7 @@ const StudentForm = ({ setLoading }) => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="w-full md:w-3/4 mt-4 p-5 rounded-md bg-white shadow-xl border mx-auto"
+        className=" w-3/4 mt-4 p-5 rounded-md bg-white shadow-xl border mx-auto"
       >
         <span className="my-5 text-blue-900 flex font-bold gap-3">
           <span>Main Details</span>
@@ -280,7 +280,7 @@ const StudentForm = ({ setLoading }) => {
         </div>
 
         <span className="my-5 flex text-blue-900 font-bold gap-3">
-          <span>Academic Details</span>
+          <span>Academic Details </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -295,10 +295,11 @@ const StudentForm = ({ setLoading }) => {
               d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
             />
           </svg>
+          <span className="text-sm font-light">--Optional</span>
         </span>
         <div className="relative z-0 w-full mb-5 group">
           <input
-            name="pincodes"
+            name="institution"
             type="number"
             onChange={handleChange}
             id="floating_s_number"
@@ -310,7 +311,7 @@ const StudentForm = ({ setLoading }) => {
             htmlFor="floating_s_number"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
-            add more pincodes (eg :570007, 56007)
+            Institution name (eg: st. joseph college )
           </label>
         </div>
         <div className="flex"></div>

@@ -13,7 +13,7 @@ const StudentForm = ({ setLoading }) => {
     s_number: "",
     p_number: "",
     address: {},
-    pincodes: "",
+    company: "",
   });
   const dispatch = useDispatch();
   const handleLocationTrigger = () => {
@@ -74,7 +74,7 @@ const StudentForm = ({ setLoading }) => {
       return;
     }
 
-    const { address, email, name, p_number, password, s_number, pincodes } =
+    const { address, email, name, p_number, password, s_number, company } =
       formData;
     const signData = {
       name,
@@ -82,7 +82,7 @@ const StudentForm = ({ setLoading }) => {
       password,
       role: "institute",
       user_data: {
-        pincodes,
+        company,
         s_number,
         p_number,
         address,
@@ -97,7 +97,7 @@ const StudentForm = ({ setLoading }) => {
         <Logo />
       </div>
       <div className="flex mt-4 pl-5 text-xl items-end font-bold text-gray-700">
-        <span>Fill the Institution sign up form</span>
+        <span>Fill the HR sign up form</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -115,7 +115,7 @@ const StudentForm = ({ setLoading }) => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="w-full md:w-3/4 mt-4 p-5 rounded-md bg-white shadow-xl border mx-auto"
+        className=" w-3/4 mt-4 p-5 rounded-md bg-white shadow-xl border mx-auto"
       >
         <span className="my-5 text-blue-900 flex font-bold gap-3">
           <span>Main Details</span>
@@ -298,8 +298,8 @@ const StudentForm = ({ setLoading }) => {
         </span>
         <div className="relative z-0 w-full mb-5 group">
           <input
-            name="pincodes"
-            type="number"
+            name="company"
+            type="text"
             onChange={handleChange}
             id="floating_s_number"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -310,7 +310,7 @@ const StudentForm = ({ setLoading }) => {
             htmlFor="floating_s_number"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
-            add more pincodes (eg :570007, 56007)
+            Company Name
           </label>
         </div>
         <div className="flex"></div>
