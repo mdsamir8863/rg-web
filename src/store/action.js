@@ -42,7 +42,7 @@ export const fetch_me = () => async (dispatch) => {
   }
 };
 
-export const signUP = (postData,role) => async (dispatch) => {
+export const signUP = (postData, role) => async (dispatch) => {
   try {
     const API = api + `/new/${role}`;
     dispatch({ type: "loading_start" });
