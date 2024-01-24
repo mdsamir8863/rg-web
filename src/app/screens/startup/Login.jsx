@@ -3,8 +3,18 @@
 // import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import RgLogo from "../../assets/RG-logo2.png";
+import { useDispatch } from "react-redux";
+import { login_user } from "../../../store/action";
+import { useState } from "react";
 const Login = () => {
-  const handleLogin = () => {
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(login_user(email, password));
     // Implement your login logic here based on the selected type
     console.log(`Logging in`);
   };
@@ -25,7 +35,7 @@ const Login = () => {
             <p className="mt-2 text-sm text-gray-600">
               Don&#x27;t have an account?{" "}
               <Link
-                to={'/register'}
+                to={"/register"}
                 title=""
                 className="font-semibold text-black transition-all duration-200 hover:underline"
               >
@@ -48,6 +58,8 @@ const Login = () => {
                       type="email"
                       placeholder="Email"
                       required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                 </div>
@@ -75,6 +87,8 @@ const Login = () => {
                       type="password"
                       placeholder="Password"
                       required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                 </div>
@@ -88,10 +102,8 @@ const Login = () => {
                 </div>
               </div>
             </form>
-           
           </div>
         </div>
-       
       </div>
     </section>
   );

@@ -14,26 +14,22 @@ const Frames = () => {
     {
       id: 1,
       image: F1,
-      text:
-        "“Unlock the power of e-learning! Access millions of video lessons by top educators, paired with expertly crafted notes and study materials. Boost your skills with daily practice, DDP, mock tests, and self-learning kits. Learn from the best, anytime,  anywhere.”",
+      text: "“Unlock the power of e-learning! Access millions of video lessons by top educators, paired with expertly crafted notes and study materials. Boost your skills with daily practice, DDP, mock tests, and self-learning kits. Learn from the best, anytime,  anywhere.”",
     },
     {
       id: 2,
       image: F2,
-      text:
-        "Discover discounted scholarships, offers, and top tutors worldwide for kindergartens, schools, colleges, universities, and tuition centers. Connect with us today for educational excellence.",
+      text: "Discover discounted scholarships, offers, and top tutors worldwide for kindergartens, schools, colleges, universities, and tuition centers. Connect with us today for educational excellence.",
     },
     {
       id: 3,
       image: F3,
-      text:
-        "“Gear up for success in competitive exams like NEET, IIT JEE, and IPS IAS! Conquer tests and exams through our Q&A game. Aim high with country, state, and district level challenges. Achieve your goals now!”",
+      text: "“Gear up for success in competitive exams like NEET, IIT JEE, and IPS IAS! Conquer tests and exams through our Q&A game. Aim high with country, state, and district level challenges. Achieve your goals now!”",
     },
     {
       id: 4,
       image: F4,
-      text:
-        "“Unlock internship opportunities in India and worldwide! Discover the best full-time and part-time jobs in your district and county with our community’s support. Let’s shape your career together!”",
+      text: "“Unlock internship opportunities in India and worldwide! Discover the best full-time and part-time jobs in your district and county with our community’s support. Let’s shape your career together!”",
     },
   ];
 
@@ -82,20 +78,20 @@ const Frames = () => {
         <div className="">
           {/* <button
             type="button"
-            className="text-white bg-gradient-to-r from-cyan-500 to-blue-900 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            className="text-white bg-gradient-to-r from-cyan-500 to-blue-900 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 .focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           >
             Sign up
           </button>
           <button
             type="button"
-            className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 .focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           >
             Login
           </button> */}
           <Link to={"/register"}>
             <button
               type="button"
-              className="text-black border border-black hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              className="text-black border border-black hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 .focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             >
               Sign up
             </button>
@@ -103,7 +99,7 @@ const Frames = () => {
           <Link to={"/login"}>
             <button
               type="button"
-              className="text-black border border-black hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              className="text-black border border-black hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 .focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             >
               Login
             </button>
