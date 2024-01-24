@@ -104,3 +104,21 @@ export const fetchChapter = (subject) => async (dispatch) => {
     dispatch({ type: "loading_stop" });
   }
 };
+
+export const fetchCourses = () => async (dispatch) => {
+  try {
+    const API = api + `/allcourses`;
+    dispatch({ type: "loading_start" });
+    const { data } = await axios.get(API, { headers: { token } });
+    console.log(data);
+    if (data?.data) {
+      dispatch({ type: "coursesData", payload: data?.data });
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("actions err>>>", error?.response?.data?.message);
+    dispatch({ type: "user_fail", payload: error?.response?.data?.message });
+  } finally {
+    dispatch({ type: "loading_stop" });
+  }
+};

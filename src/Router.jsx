@@ -69,12 +69,9 @@ const Routing = () => {
   const { loading } = useSelector((e) => e.loading_reducer);
   const dispatch = useDispatch();
 
-
-
-  const handleSubjectRedirect =(e)=>{
-    console.log(e)
-
-  }
+  const handleSubjectRedirect = (e) => {
+    console.log(e);
+  };
 
   useEffect(() => {
     // Simulate a delay for demonstration purposes
@@ -90,8 +87,6 @@ const Routing = () => {
       dispatch(fetch_me());
     }
   }, [user]);
-
-  
 
   useEffect(() => {
     try {
@@ -199,7 +194,7 @@ const Routing = () => {
               path="/student/home"
               element={
                 user && user.role === "student" ? (
-                  <StudentHome handleSubjectRedirect={handleSubjectRedirect}/>
+                  <StudentHome handleSubjectRedirect={handleSubjectRedirect} />
                 ) : (
                   <Navigate to={"/home"} />
                 )

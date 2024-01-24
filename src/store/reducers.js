@@ -40,3 +40,10 @@ export const studentSubjectReducers = createReducer(initialState, (builder) => {
     state.subjects = action.payload;
   });
 });
+
+
+export const studentCoursesReducers = createReducer(initialState, (builder) => {
+  builder.addCase("coursesData", (state, action) => {
+    state.courses = action.payload;
+  });
+});
