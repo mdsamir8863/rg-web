@@ -155,7 +155,7 @@ const SearchAdmission = () => {
               </div>
               <div className="right">
                 <p className="font-semibold text-[#4E4E4E] text-lg">
-                  Lipin School
+                  Lupin School
                 </p>
                 <p className="text-sm text-[#4E4E4E] fs12">
                   Time: 5:30pm to 6pm
@@ -172,8 +172,6 @@ const SearchAdmission = () => {
                 </button>
               </div>
             </div>
-           
-           
           </div>
         </div>
       </section>
