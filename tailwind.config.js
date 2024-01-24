@@ -35,7 +35,7 @@ export default {
         },
       },
       screens: {
-        '2xl': {'max': '2095px'},
+        '2xl': {'max': '8095px'},
         // => @media (max-width: 1535px) { ... }
   
         'desk': {'max': '1279px'},

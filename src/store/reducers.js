@@ -35,3 +35,8 @@ export const error_reducer = createReducer(initialState, (builder) => {
     });
 });
 
+export const studentSubjectReducers = createReducer(initialState, (builder) => {
+  builder.addCase("subjectData", (state, action) => {
+    state.subjects = action.payload;
+  });
+});

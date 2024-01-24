@@ -69,6 +69,13 @@ const Routing = () => {
   const { loading } = useSelector((e) => e.loading_reducer);
   const dispatch = useDispatch();
 
+
+
+  const handleSubjectRedirect =(e)=>{
+    console.log(e)
+
+  }
+
   useEffect(() => {
     // Simulate a delay for demonstration purposes
     const timer = setTimeout(() => {
@@ -79,14 +86,21 @@ const Routing = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetch_me());
-  }, []);
+    if (!user) {
+      dispatch(fetch_me());
+    }
+  }, [user]);
+
+  
 
   useEffect(() => {
-    console.log(error);
-    if (error) {
-      toast.error(error);
-      dispatch({ type: "clear_error" });
+    try {
+      if (error) {
+        toast.error(error);
+        dispatch({ type: "clear_error" });
+      }
+    } catch (err) {
+      toast.error(err);
     }
   }, [dispatch, user, error]);
 
@@ -99,9 +113,6 @@ const Routing = () => {
         {loading || loadingComponent ? <Loader /> : ""}
         {preLoading ? <PreLoader /> : ""}
         {!preLoading && user ? <Navbar user={user} /> : ""}
-
-        {/* <div className="h-10 w-full flex"></div> */}
-
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<Navigate to={"/home"} />} />
@@ -188,7 +199,7 @@ const Routing = () => {
               path="/student/home"
               element={
                 user && user.role === "student" ? (
-                  <StudentHome />
+                  <StudentHome handleSubjectRedirect={handleSubjectRedirect}/>
                 ) : (
                   <Navigate to={"/home"} />
                 )
