@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Logo from "../assets/RG-logo2.png";
-const Navbar = ({ user }) => {
+const Navbar = () => {
   const [activeTab, setActiveTab] = useState("home");
-  const [role, setRole] = useState(user?.role);
+
+  const { user } = useSelector((e) => e.user_reducer);
+  const [role, setRole] = useState("student");
 
   const handleTabClick = (tab) => {
     // Vibrate for 100 milliseconds
@@ -24,7 +27,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -66,7 +69,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -87,7 +90,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -108,7 +111,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -130,7 +133,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -173,7 +176,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -194,7 +197,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -215,7 +218,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -238,7 +241,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -281,7 +284,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -302,7 +305,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -323,7 +326,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -346,7 +349,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -389,7 +392,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -401,8 +404,8 @@ const Navbar = ({ user }) => {
         nav_to: "/jobseeker/market",
       },
       {
-        name: "job-post",
-        role: "job-post",
+        name: "jobs",
+        role: "jobs",
         icon: (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -410,7 +413,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -419,7 +422,7 @@ const Navbar = ({ user }) => {
             />
           </svg>
         ),
-        nav_to: "/jobseeker/job-post",
+        nav_to: "/jobseeker/jobs",
       },
       {
         name: "Profile",
@@ -431,7 +434,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -454,7 +457,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -497,7 +500,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -518,7 +521,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6 rotate-180"
           >
             <path
               strokeLinecap="round"
@@ -539,7 +542,7 @@ const Navbar = ({ user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -553,7 +556,6 @@ const Navbar = ({ user }) => {
     ],
   };
 
-  console.log(user);
   return (
     <>
       <nav className="custom w-full sm:px-3 flex justify-center h-16 backdrop-blur-sm  z-40  items-center  shadow-xl phone:bg-transparent text-black ">
@@ -578,12 +580,12 @@ const Navbar = ({ user }) => {
           </div>
         </div>
 
-        <div className="flex phone:flex rounded-2xl  2xl:hidden mbNav justify-evenly h-16 items-center border bg-gray-50 shadow-2xl  w-[95%] ">
+        <div className="flex phone:flex 2xl:hidden mbNav justify-evenly h-16 items-center border bg-gray-50 shadow-2xl rounded-md w-full">
           {Tabdata[role].map((e, i) => (
             <Link
               key={i}
               to={`${e?.nav_to}`}
-              className={` rounded-full h-12 w-12 flex flex-col items-center justify-center px-3 py-3  border ${
+              className={` rounded-full flex items-center justify-center px-3 py-3  border ${
                 activeTab === e.role
                   ? "bg-purple-400 text-white duration-300 "
                   : ""
@@ -591,7 +593,6 @@ const Navbar = ({ user }) => {
               onClick={() => handleTabClick(e.role)}
             >
               {e.icon}
-              <span className="text-[0.4rem]">{e.name}</span>
             </Link>
           ))}
         </div>
