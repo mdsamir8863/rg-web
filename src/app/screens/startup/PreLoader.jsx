@@ -17,7 +17,7 @@ const PreLoader = () => {
       {/* <img src={Preloader} alt="" /> */}
       <div
         id="preLoader"
-        className="w-full z-[999999] h-screen top-0 bg-cover bg-no-repeat bg-center flex items-center justify-center  fadingEffect"
+        className="w-full z-[999999] fixed  h-screen top-0 bg-cover bg-no-repeat bg-center flex items-center justify-center  fadingEffect"
         style={{
           backgroundImage: `url(${Preloader})`,
         }}
