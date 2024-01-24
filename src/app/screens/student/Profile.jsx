@@ -7,19 +7,9 @@ const MyProfilePage = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [showAvatarSelector, setShowAvatarSelector] = useState(false);
 
-
   const handleAvatarSelect = (avatar) => {
     setSelectedAvatar(avatar);
     setShowAvatarSelector(false); // Close the avatar selector after selecting an avatar
-  };
-
-  const handleLogout = () => {
-    const action = confirm("Do you want to logout?");
-    if (action) {
-      localStorage.clear();
-      location.reload();
-      return;
-    }
   };
 
   const handleChooseAvatarClick = () => {
@@ -87,10 +77,7 @@ const MyProfilePage = () => {
           </svg>
           View Exam Results
         </Link>
-        <button
-          onClick={handleLogout}
-          className="flex gap-3 w-full sm:w-3/4 items-center border py-2 px-5 rounded hover:bg-purple-300"
-        >
+        <Link className="flex gap-3 w-full sm:w-3/4 items-center border py-2 px-5 rounded hover:bg-purple-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -106,7 +93,7 @@ const MyProfilePage = () => {
             />
           </svg>
           Log Out
-        </button>
+        </Link>
       </div>
 
       {/* AvatarSelector */}

@@ -2,7 +2,6 @@ import { useState } from "react";
 import AvatarSelector from "../../AvatarSelector"; // Assume you have an AvatarSelector component
 import { Link } from "react-router-dom";
 import bgTop from "../../assets/bg-designs/homBgTop.png";
-import { handleLogout } from "../../util/logoutUtil";
 
 const MyProfilePage = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
@@ -78,10 +77,7 @@ const MyProfilePage = () => {
           </svg>
           View Exam Results
         </Link>
-        <button
-          onClick={handleLogout}
-          className="flex gap-3 w-full sm:w-3/4 items-center border py-2 px-5 rounded hover:bg-purple-300"
-        >
+        <Link className="flex gap-3 w-full sm:w-3/4 items-center border py-2 px-5 rounded hover:bg-purple-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -97,7 +93,7 @@ const MyProfilePage = () => {
             />
           </svg>
           Log Out
-        </button>
+        </Link>
       </div>
 
       {/* AvatarSelector */}
