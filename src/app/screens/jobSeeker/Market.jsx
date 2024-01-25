@@ -13,7 +13,7 @@ import graphicCourse from "../../assets/graphicsCourse.jpg";
 const Market = () => {
   return (
     <>
-      <div className="flex flex-col gap-5 h-full w-[95%] mx-auto my-3">
+      <div className="flex flex-col gap-5 h-full w-[98%] mx-auto my-3">
         <div className=" flex flex-col gap-3">
           <p className="flex items-center gap-1">
             <img className="h-5" src={market} alt="" />
@@ -24,7 +24,7 @@ const Market = () => {
             <input
               type="text"
               placeholder="Search Your Courses Here.."
-              className="border border-gray-300  rounded-md focus:outline-none focus:ring focus:border-blue-300 px-8 py-2 font-bold text-sm w-full sm:w-2/3"
+              className="border border-gray-300  rounded-md focus:outline-none focus:ring focus:border-blue-300 px-8 py-2 font-bold text-sm w-2/3"
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -43,8 +43,8 @@ const Market = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-800 to-purple-600 rounded  flex justify-evenly w-full items-center">
-          <div className="flex flex-col gap-3 pl-3">
+        <div className="bg-gradient-to-br from-blue-800 to-purple-600 rounded pt-5 flex justify-evenly w-full items-center">
+          <div className="flex flex-col gap-3 pl-1">
             <p className="font-bold text-xl text-white">Grow Professionally </p>
             <p className=" text-white">
               Learn New Skills and grow your earnings
@@ -84,7 +84,7 @@ const Market = () => {
           </div>
         </div>
 
-        <div className="flex flex-col w-full mb-16 gap-3 sm:w-2/3 mx-auto bg-gray-100">
+        <div className="flex flex-col w-full mb-10 gap-3 sm:w-2/3 mx-auto bg-gray-100">
           <p className="flex items-center gap-2 rounded bg-gradient-to-tr bg-yellow-500 p-3 text-white font-bold text-lg from-green-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"

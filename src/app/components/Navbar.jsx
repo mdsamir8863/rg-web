@@ -6,7 +6,7 @@ const Navbar = () => {
   const [activeTab, setActiveTab] = useState("home");
 
   const { user } = useSelector((e) => e.user_reducer);
-  const [role, setRole] = useState("hr");
+  const [role, setRole] = useState("student");
 
   const handleTabClick = (tab) => {
     // Vibrate for 100 milliseconds
