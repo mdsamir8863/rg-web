@@ -35,3 +35,15 @@ export const error_reducer = createReducer(initialState, (builder) => {
     });
 });
 
+export const studentSubjectReducers = createReducer(initialState, (builder) => {
+  builder.addCase("subjectData", (state, action) => {
+    state.subjects = action.payload;
+  });
+});
+
+
+export const studentCoursesReducers = createReducer(initialState, (builder) => {
+  builder.addCase("coursesData", (state, action) => {
+    state.courses = action.payload;
+  });
+});
