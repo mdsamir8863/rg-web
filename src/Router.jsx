@@ -75,6 +75,9 @@ const Routing = () => {
       dispatch({ type: "clear_error" });
     }
   }, [dispatch, user]);
+  const handleSubjectRedirect = (e) => {
+    console.log(e);
+  };
 
   useEffect(() => {
     // Simulate a delay for demonstration purposes
@@ -84,6 +87,23 @@ const Routing = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(fetch_me());
+    }
+  }, [user]);
+
+  useEffect(() => {
+    try {
+      if (error) {
+        toast.error(error);
+        dispatch({ type: "clear_error" });
+      }
+    } catch (err) {
+      toast.error(err);
+    }
+  }, [dispatch, user, error]);
 
   return (
     <>
@@ -129,13 +149,57 @@ const Routing = () => {
               <Route path="/register" element={<Reg1 />} />
               <Route path="/admission" element={<SearchAdmission />} />
 
-              {/* Student screens */}
-              <Route path="/student/home" element={<StudentHome />} />
-              <Route path="/student/notification" element={<S_Notifi />} />
-              <Route path="/student/market" element={<S_Market />} />
-              <Route path="/student/games" element={<S_Games />} />
-              <Route path="/student/profile" element={<S_Profile />} />
-              <Route path="/student/admission" element={<Admission />} />
+            {/* Student screens */}
+            <Route
+              path="/student/home"
+              element={
+                user && user.role === "student" ? (
+                  <StudentHome handleSubjectRedirect={handleSubjectRedirect} />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/student/notification"
+              element={
+                user && user.role === "student" ? (
+                  <S_Notifi />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/student/market"
+              element={
+                user && user.role === "student" ? (
+                  <S_Market />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/student/games"
+              element={
+                user && user.role === "student" ? (
+                  <S_Games />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/student/profile"
+              element={
+                user && user.role === "student" ? (
+                  <S_Profile />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
 
               {/* Teacher screens */}
               <Route path="/teacher/home" element={<TeacherHome />} />
