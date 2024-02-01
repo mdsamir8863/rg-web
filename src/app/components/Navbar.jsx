@@ -506,7 +506,7 @@ const Navbar = ({ user }) => {
             />
           </svg>
         ),
-        nav_to: "/institute/leads",
+        nav_to: "/institute/market",
       },
       {
         name: "post",

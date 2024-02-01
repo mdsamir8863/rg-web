@@ -1,7 +1,10 @@
+import ComingSoon from "../ComingSoon"
 
 const Games = () => {
   return (
-    <div>Games</div>
+    <>
+    <ComingSoon/>
+    </>
   )
 }
 

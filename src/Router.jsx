@@ -29,6 +29,17 @@ const S_Notifi = lazy(() => import("./app/screens/student/Notifi"));
 const S_Market = lazy(() => import("./app/screens/student/Market"));
 const S_Games = lazy(() => import("./app/screens/student/Games"));
 const S_Profile = lazy(() => import("./app/screens/student/Profile"));
+const S_Chapter = lazy(() => import("./app/screens/student/SubjectChapters"));
+const Chapter = lazy(() => import("./app/screens/student/Chapter"));
+const Courses = lazy(() => import("./app/screens/student/Courses"));
+const SLibrary = lazy(() => import("./app/screens/student/SLibrary"));
+const Course = lazy(() => import("./app/screens/student/Course"));
+const Library = lazy(() => import("./app/screens/student/Library"));
+const ComingSoon = lazy(() => import("./app/screens/ComingSoon"));
+const Admission = lazy(() => import("./app/screens/student/Admission"));
+
+
+
 
 // Teacher import
 const TeacherHome = lazy(() => import("./app/screens/home/TeacherHome"));
@@ -61,6 +72,8 @@ const J_Profile = lazy(() => import("./app/screens/jobSeeker/Profile"));
 import { useDispatch, useSelector } from "react-redux";
 import { toast, Toaster } from "react-hot-toast";
 import { fetch_me } from "./store/action";
+import ErrorBoundary from "./ErrorBoundary";
+import ElearningPop from "./app/components/ElearningPop";
 
 const Routing = () => {
   const { user, error } = useSelector((e) => e.user_reducer);
@@ -68,6 +81,7 @@ const Routing = () => {
   const [loadingComponent, setLoading] = useState(false);
   const { loading } = useSelector((e) => e.loading_reducer);
   const dispatch = useDispatch();
+  const [popUpforEl,setPopUpforEl] = useState(false)
 
   const handleSubjectRedirect = (e) => {
     console.log(e);
@@ -100,12 +114,13 @@ const Routing = () => {
   }, [dispatch, user, error]);
 
   return (
-    <>
+    <ErrorBoundary>
       <BrowserRouter>
         <div>
           <Toaster />
         </div>
         {loading || loadingComponent ? <Loader /> : ""}
+       {popUpforEl ? <ElearningPop setPopUpforEl={setPopUpforEl}/> : ''}
         {preLoading ? <PreLoader /> : ""}
         {!preLoading && user ? <Navbar user={user} /> : ""}
         <Suspense fallback={<Loader />}>
@@ -200,6 +215,27 @@ const Routing = () => {
                 )
               }
             />
+      <Route path="/coming/soon" element={user ? <ComingSoon/> :''}/>
+            <Route
+              path="/subject/:subject"
+              element={
+                user && user.role === "student" ? (
+                  <S_Chapter />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/admission"
+              element={
+                user && user.role === "student" ? (
+                  <Admission />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
             <Route
               path="/student/notification"
               element={
@@ -214,7 +250,7 @@ const Routing = () => {
               path="/student/market"
               element={
                 user && user.role === "student" ? (
-                  <S_Market />
+                  <S_Market setPopUpforEl={setPopUpforEl}/>
                 ) : (
                   <Navigate to={"/home"} />
                 )
@@ -235,6 +271,56 @@ const Routing = () => {
               element={
                 user && user.role === "student" ? (
                   <S_Profile />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/s/courses"
+              element={
+                user && user.role === "student" ? (
+                  <Courses setPopUpforElCB={()=>setPopUpforEl(false)} />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/s/library"
+              element={
+                user && user.role === "student" ? (
+                  <Library setPopUpforElCB={()=>setPopUpforEl(false)} />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/chapter/:id"
+              element={
+                user && user.role === "student" ? (
+                  <Chapter />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/library/:id"
+              element={
+                user && user.role === "student" ? (
+                  <SLibrary />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/course/:id"
+              element={
+                user && user.role === "student" ? (
+                  <Course />
                 ) : (
                   <Navigate to={"/home"} />
                 )
@@ -292,6 +378,7 @@ const Routing = () => {
                 )
               }
             />
+            
             {/* Institute screens */}
             <Route
               path="/institute/home"
@@ -324,7 +411,7 @@ const Routing = () => {
               }
             />
             <Route
-              path="/institute/games"
+              path="/institute/job-post"
               element={
                 user && user.role === "institute" ? (
                   <Ins_Post />
@@ -451,7 +538,7 @@ const Routing = () => {
         </Suspense>
         {/* <PreLoader /> */}
       </BrowserRouter>
-    </>
+    </ErrorBoundary>
   );
 };
 

@@ -5,7 +5,7 @@ import RgLogo from "../../assets/rg-logo.png";
 const PreLoader = () => {
   const runScript = () => {
     setTimeout(() => {
-      document.getElementById("preLoader").classList.add("fadingout");
+      // document.getElementById("preLoader").classList.add("fadingout");
     }, 1500);
   };
 

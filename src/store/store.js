@@ -1,5 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { loading_reducer, user_reducer, error_reducer, studentSubjectReducers ,studentCoursesReducers} from "./reducers";
+import {
+  loading_reducer,
+  user_reducer,
+  error_reducer,
+  studentSubjectReducers,
+  studentSubjectChapterReducers,
+  studentCoursesReducers,
+} from "./reducers";
 
 const store = configureStore({
   reducer: {
@@ -7,7 +14,8 @@ const store = configureStore({
     user_reducer,
     error_reducer,
     studentSubjectReducers,
-    studentCoursesReducers
+    studentCoursesReducers,
+    studentSubjectChapterReducers,
   },
 });
 

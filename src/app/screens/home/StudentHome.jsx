@@ -7,9 +7,10 @@ import otherCourse from "../../assets/Icons/otherCourseIcon.png";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCourses, fetchSubjectData } from "../../../store/action";
+import { Link } from "react-router-dom";
 
 // import MainNavbar from "../../components/MainNavBar";
-const StudentHome = ({ handleSubjectRedirect }) => {
+const StudentHome = () => {
   const dispatch = useDispatch();
   const { subjects } = useSelector((e) => e.studentSubjectReducers);
   const { courses } = useSelector((e) => e.studentCoursesReducers);
@@ -22,6 +23,9 @@ const StudentHome = ({ handleSubjectRedirect }) => {
       return;
     }
   }, []);
+
+
+ 
 
   useEffect(() => {
     console.log(courses);
@@ -72,10 +76,10 @@ const StudentHome = ({ handleSubjectRedirect }) => {
               <div className="flex items-center flex-wrap justify-center phone:w-full w-[90%] gap-10">
                 {subjects &&
                   subjects.map((e, i) => (
-                    <div
-                      onClick={() => handleSubjectRedirect(e)}
+                    <Link
+                      to={`/subject/${e}`}
                       key={i}
-                      className=" flex flex-col justify-center items-center relative"
+                      className=" flex cursor-pointer flex-col justify-center items-center relative"
                     >
                       <img src={BookBg} alt="" />
                       <p className="absolute  text-center  z-10 font-semibold text-[0.6rem]">
@@ -84,7 +88,7 @@ const StudentHome = ({ handleSubjectRedirect }) => {
                       <p className="text-center text-[#8B8B8B] text-sm mt-1">
                         {e?.split(" ")[0]}
                       </p>
-                    </div>
+                    </Link>
                   ))}
               </div>
             </div>
@@ -102,12 +106,13 @@ const StudentHome = ({ handleSubjectRedirect }) => {
                 {courses &&
                   Object.keys(courses).map((e, i) => {
                     return (
-                      <div
-                        onClick={() =>
-                          handleSubjectRedirect(courses[e][0]?._id)
-                        }
+                      <Link
+                        // onClick={() =>
+                        //   handleSubjectRedirect(courses[e][0]?._id)
+                        // }
+                        to={`/course/${courses[e][0]?._id}`}
                         key={i}
-                        className="flex flex-col justify-center items-center relative"
+                        className="flex flex-col cursor-pointer  justify-center items-center relative"
                       >
                         <img src={BookBg} alt="" />
                         <p className="absolute  text-center  z-10 font-semibold text-[0.6rem]">
@@ -116,7 +121,7 @@ const StudentHome = ({ handleSubjectRedirect }) => {
                         <p className="text-center text-[#8B8B8B] text-sm mt-1">
                           {courses[e][0]?.sub?.split(" ")[0]}
                         </p>
-                      </div>
+                      </Link>
                     );
                   })}
               </div>
