@@ -37,6 +37,7 @@ const Course = lazy(() => import("./app/screens/student/Course"));
 const Library = lazy(() => import("./app/screens/student/Library"));
 const ComingSoon = lazy(() => import("./app/screens/ComingSoon"));
 const Admission = lazy(() => import("./app/screens/student/Admission"));
+const SCommunity = lazy(() => import("./app/screens/student/SCommunity"));
 
 
 
@@ -251,6 +252,16 @@ const Routing = () => {
               element={
                 user && user.role === "student" ? (
                   <S_Market setPopUpforEl={setPopUpforEl}/>
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/s/community"
+              element={
+                user && user.role === "student" ? (
+                  <SCommunity/>
                 ) : (
                   <Navigate to={"/home"} />
                 )

@@ -85,7 +85,7 @@ const Market = ({setPopUpforEl}) => {
 
                 <p className="text-center text-white text-sm mt-1">Games</p>
               </Link>
-              <Link to="/coming/soon"  className="bg-gradient-to-br from-purple-800 to-blue-700 rounded  w-[6.5rem] h-[5.5rem]  flex flex-col items-center justify-center">
+              <Link to="/s/community"  className="bg-gradient-to-br from-purple-800 to-blue-700 rounded  w-[6.5rem] h-[5.5rem]  flex flex-col items-center justify-center">
                 <img src={Community} alt="" />
 
                 <p className="text-center text-white text-sm mt-1">Community</p>

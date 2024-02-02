@@ -278,14 +278,32 @@ export const fetchAllInst = (func) => async (dispatch) => {
     dispatch({ type: "loading_stop" });
   }
 };
-export const AddOnInte = (id,func) => async (dispatch) => {
+export const fetchAllTeacher = (func) => async (dispatch) => {
+  try {
+    const API = api + `/get/near/teacher`;
+    dispatch({ type: "loading_start" });
+    const { data } = await axios.get(API, { headers: { token } });
+    console.log(data);
+    if (data?.data) {
+      console.log(data.data, "shdchsc");
+      func(data?.data);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("actions err>>>", error?.response?.data?.message);
+    dispatch({ type: "user_fail", payload: error?.response?.data?.message });
+  } finally {
+    dispatch({ type: "loading_stop" });
+  }
+};
+export const AddOnInte = (id, func) => async (dispatch) => {
   try {
     const API = api + `/show/inst/${id}`;
     dispatch({ type: "loading_start" });
-    const { data } = await axios.put(API,{},{ headers: { token } });
+    const { data } = await axios.put(API, {}, { headers: { token } });
     console.log(data);
     if (data?.data) {
-      func(e=>!e)
+      func((e) => !e);
       console.log(data.data, "shdchsc");
     }
   } catch (error) {
@@ -297,8 +315,7 @@ export const AddOnInte = (id,func) => async (dispatch) => {
   }
 };
 
-
-export const fetchSearchInst = (func,inp) => async (dispatch) => {
+export const fetchSearchInst = (func, inp) => async (dispatch) => {
   try {
     const API = api + `/search/inst/${inp}`;
     dispatch({ type: "loading_start" });
@@ -318,8 +335,7 @@ export const fetchSearchInst = (func,inp) => async (dispatch) => {
   }
 };
 
-
-export const fetchALlLeads = (func)=>async(dispatch)=>{
+export const fetchALlLeads = (func) => async (dispatch) => {
   try {
     const API = api + `/fetchallleadsa`;
     dispatch({ type: "loading_start" });
@@ -337,9 +353,9 @@ export const fetchALlLeads = (func)=>async(dispatch)=>{
   } finally {
     dispatch({ type: "loading_stop" });
   }
-}
+};
 
-export const getInstDetailsById = (id,func,invert)=>async(dispatch)=>{
+export const getInstDetailsById = (id, func, invert) => async (dispatch) => {
   try {
     const API = api + `/get/inst/${id}`;
     dispatch({ type: "loading_start" });
@@ -349,7 +365,7 @@ export const getInstDetailsById = (id,func,invert)=>async(dispatch)=>{
       // inverter(true)
       console.log(data.data, "shdchsc");
       func(data?.data);
-      invert(true)
+      invert(true);
     }
   } catch (error) {
     console.log(error);
@@ -358,4 +374,4 @@ export const getInstDetailsById = (id,func,invert)=>async(dispatch)=>{
   } finally {
     dispatch({ type: "loading_stop" });
   }
-}
+};
