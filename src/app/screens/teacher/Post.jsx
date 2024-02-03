@@ -1,5 +1,7 @@
+import ComingSoon from "../ComingSoon";
+
 const Post = () => {
-  return <div>Post</div>;
+  return <ComingSoon />;
 };
 
 export default Post;

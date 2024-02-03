@@ -474,7 +474,7 @@ const Routing = () => {
               }
             />
             <Route
-              path="/hr/games"
+              path="/hr/job-post"
               element={
                 user && user.role === "hr" ? (
                   <Hr_Post />

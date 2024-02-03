@@ -1,18 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchAllTeacher } from "../../../store/action";
+import { fetchAllTeacher, finTeacherOnMail } from "../../../store/action";
+import TeacherCom from "../../components/TeacherCom";
 
 const SCommunity = () => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     dispatch(fetchAllTeacher(setData));
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(finTeacherOnMail(searchInput, setData));
+  };
+
   return (
     <section className="w-full flex flex-col items-center">
-      <form className="my-10 w-3/4 ">
+      <form onSubmit={handleSubmit} className="my-10 w-3/4 ">
         <label
           htmlFor="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only .:text-white"
@@ -38,7 +45,9 @@ const SCommunity = () => {
             </svg>
           </div>
           <input
-            type="search"
+            type="email"
+            onChange={(e) => setSearchInput(e.target.value)}
+            value={searchInput}
             id="default-search"
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 .:bg-gray-700 .:border-gray-600 .:placeholder-gray-400 .:text-white .:focus:ring-blue-500 .:focus:border-blue-500"
             placeholder="Search You teacher with their email"
@@ -68,42 +77,16 @@ const SCommunity = () => {
                 Name
               </th>
               <th scope="col" className="px-6 py-3">
-                Color
+                Institute work in
               </th>
-              <th scope="col" className="px-6 py-3">
-                Category
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Price
-              </th>
+
               <th scope="col" className="px-6 py-3">
                 <span className="sr-only">Edit</span>
               </th>
             </tr>
           </thead>
           <tbody>
-            {data &&
-              data.map((e) => (
-                <tr key={e._id} className="bg-white border-b .:bg-gray-800 .:border-gray-700">
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap .:text-white"
-                  >
-                    {e?.name}
-                  </th>
-                  <td className="px-6 py-4">Silver</td>
-                  <td className="px-6 py-4">Laptop</td>
-                  <td className="px-6 py-4">$2999</td>
-                  <td className="px-6 py-4 text-right">
-                    <a
-                      href="#"
-                      className="font-medium text-blue-600 .:text-blue-500 hover:underline"
-                    >
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-              ))}
+            {data && data.map((e) => <TeacherCom key={e._id} e={e} />)}
           </tbody>
         </table>
       </div>

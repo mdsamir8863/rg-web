@@ -375,3 +375,70 @@ export const getInstDetailsById = (id, func, invert) => async (dispatch) => {
     dispatch({ type: "loading_stop" });
   }
 };
+
+export const followUser = (id, invert) => async (dispatch) => {
+  try {
+    const API = api + `/follow/teacher/${id}`;
+    dispatch({ type: "loading_start" });
+    const { data } = await axios.post(API, {}, { headers: { token } });
+    console.log(data);
+    if (data?.data) {
+      // inverter(true)
+      console.log(data.data, "shdchsc");
+      invert(true);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("actions err>>>", error?.response?.data?.message);
+    dispatch({ type: "user_fail", payload: error?.response?.data?.message });
+  } finally {
+    dispatch({ type: "loading_stop" });
+  }
+};
+
+export const finTeacherOnMail = (email, func) => async (dispatch) => {
+  try {
+    const API = api + `/find/teacher`;
+    dispatch({ type: "loading_start" });
+    const { data } = await axios.post(
+      API,
+      { email: email },
+      { headers: { token } }
+    );
+    console.log(data);
+    if (data?.data) {
+      // inverter(true)
+      console.log(data.data, "shdchsc");
+      func(data.data);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("actions err>>>", error?.response?.data?.message);
+    dispatch({ type: "user_fail", payload: error?.response?.data?.message });
+  } finally {
+    dispatch({ type: "loading_stop" });
+  }
+};
+export const findStudentFromId = (id, func) => async (dispatch) => {
+  try {
+    const API = api + `/find/student`;
+    dispatch({ type: "loading_start" });
+    const { data } = await axios.post(
+      API,
+      { id: id },
+      { headers: { token } }
+    );
+    console.log(data);
+    if (data?.data) {
+      // inverter(true)`
+      console.log(data.data, "shdchsc");
+      func(data.data);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("actions err>>>", error?.response?.data?.message);
+    dispatch({ type: "user_fail", payload: error?.response?.data?.message });
+  } finally {
+    dispatch({ type: "loading_stop" });
+  }
+};
