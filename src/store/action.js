@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import axios from "axios";
-let api = "/api/v1";
+let api = "http://13.234.17.157/api/v1";
 const token = localStorage.getItem("token");
 
 export const login_user = (email, password) => async (dispatch) => {

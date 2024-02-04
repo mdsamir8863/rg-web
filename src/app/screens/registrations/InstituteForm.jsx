@@ -26,7 +26,7 @@ const StudentForm = ({ setLoading }) => {
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
 
-            const URI = `/api/v1/location?lat=${lat}&lon=${lon}`;
+            const URI = `http://13.234.17.157/api/v1/location?lat=${lat}&lon=${lon}`;
             axios
               .get(URI)
               .then((res) => {
@@ -298,7 +298,7 @@ const StudentForm = ({ setLoading }) => {
         <div className="relative z-0 w-full mb-5 group">
           <input
             name="pincodes"
-            type="number"
+            type="text"
             onChange={handleChange}
             id="floating_s_number"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none .text-white .border-gray-600 .focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"

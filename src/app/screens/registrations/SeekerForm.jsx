@@ -107,7 +107,7 @@ const StudentForm = ({ setLoading }) => {
 
             
 
-            const URI = `/api/v1/location?lat=${lat}&lon=${lon}`;
+            const URI = `http://13.234.17.157/api/v1/location?lat=${lat}&lon=${lon}`;
             axios
               .get(URI)
               .then((res) => {
