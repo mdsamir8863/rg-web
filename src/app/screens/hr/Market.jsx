@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
 
 import category from "../../assets/Category.png";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getMyCreatedJob } from "../../../store/action";
 
 const Post = () => {
+  const [postedData, setPostedData] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMyCreatedJob(setPostedData));
+  }, []);
+
   return (
     <>
       <div className="flex flex-col bg-slate-50 my-5 mb-16">
@@ -34,115 +44,35 @@ const Post = () => {
           Recent Posts
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-3">
-          <div className="flex items-start justify-start gap-2 border py-5 px-2">
-            <img
-              className="border rounded-full h-12 w-12"
-              src=""
-              alt=""
-            />
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold">UX Designer</p>
-              <p className="fs12 text-black font-semibold">Amazon</p>
-              <p className="fs12 text-[#3C3C43]">Seattle, US (Remote)</p>
-              <p className="fs12 text-black font-bold">Posted 9h ago</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <button className="px-2 bg-blue-600 py-1 fs12 text-white rounded">
-                155 Responses
-              </button>
-            </div>
-          </div>
-          <div className="flex items-start justify-start gap-2 border py-5 px-2">
-            <img
-              className="border rounded-full h-12 w-12"
-              src=""
-              alt=""
-            />
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold">UX Designer</p>
-              <p className="fs12 text-black font-semibold">Amazon</p>
-              <p className="fs12 text-[#3C3C43]">Seattle, US (Remote)</p>
-              <p className="fs12 text-black font-bold">Posted 9h ago</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <button className="px-2 bg-blue-600 py-1 fs12 text-white rounded">
-                155 Responses
-              </button>
-            </div>
-          </div>
-          <div className="flex items-start justify-start gap-2 border py-5 px-2">
-            <img
-              className="border rounded-full h-12 w-12"
-              src=""
-              alt=""
-            />
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold">UX Designer</p>
-              <p className="fs12 text-black font-semibold">Amazon</p>
-              <p className="fs12 text-[#3C3C43]">Seattle, US (Remote)</p>
-              <p className="fs12 text-black font-bold">Posted 9h ago</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <button className="px-2 bg-blue-600 py-1 fs12 text-white rounded">
-                155 Responses
-              </button>
-            </div>
-          </div>
-          <div className="flex items-start justify-start gap-2 border py-5 px-2">
-            <img
-              className="border rounded-full h-12 w-12"
-              src=""
-              alt=""
-            />
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold">UX Designer</p>
-              <p className="fs12 text-black font-semibold">Amazon</p>
-              <p className="fs12 text-[#3C3C43]">Seattle, US (Remote)</p>
-              <p className="fs12 text-black font-bold">Posted 9h ago</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <button className="px-2 bg-blue-600 py-1 fs12 text-white rounded">
-                155 Responses
-              </button>
-            </div>
-          </div>
-          <div className="flex items-start justify-start gap-2 border py-5 px-2">
-            <img
-              className="border rounded-full h-12 w-12"
-              src=""
-              alt=""
-            />
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold">UX Designer</p>
-              <p className="fs12 text-black font-semibold">Amazon</p>
-              <p className="fs12 text-[#3C3C43]">Seattle, US (Remote)</p>
-              <p className="fs12 text-black font-bold">Posted 9h ago</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <button className="px-2 bg-blue-600 py-1 fs12 text-white rounded">
-                155 Responses
-              </button>
-            </div>
-          </div>
-          <div className="flex items-start justify-start gap-2 border py-5 px-2">
-            <img
-              className="border rounded-full h-12 w-12"
-              src=""
-              alt=""
-            />
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold">UX Designer</p>
-              <p className="fs12 text-black font-semibold">Amazon</p>
-              <p className="fs12 text-[#3C3C43]">Seattle, US (Remote)</p>
-              <p className="fs12 text-black font-bold">Posted 9h ago</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <button className="px-2 bg-blue-600 py-1 fs12 text-white rounded">
-                155 Responses
-              </button>
-            </div>
-          </div>
+        <div className="flex w-full  gap-5 p-5  flex-wrap">
+          {postedData &&
+            postedData.map((e) => (
+              <div
+                key={e._id}
+                className="flex items-start w-3/4 justify-start gap-2 border py-5 px-2"
+              >
+                <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                  <span class="font-medium text-gray-600 dark:text-gray-300">
+                   {e?.posterCompany.slice(0,2)}
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <p className="font-semibold">{e?.title}</p>
+                  <p className="fs12 text-black font-semibold">
+                    {e?.posterCompany}
+                  </p>
+                  <p className="fs12 text-[#3C3C43]">{e?.location}</p>
+                  <p className="fs12 text-gray-600 font-bold">{e?.description}</p>
+                  <p className="fs12 text-black f">{e?.created_at}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <button className="px-2 bg-blue-600 py-1 fs12 text-white rounded">
+                    {e?.applied.length} Responses
+                  </button>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </>

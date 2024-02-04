@@ -423,16 +423,69 @@ export const findStudentFromId = (id, func) => async (dispatch) => {
   try {
     const API = api + `/find/student`;
     dispatch({ type: "loading_start" });
-    const { data } = await axios.post(
-      API,
-      { id: id },
-      { headers: { token } }
-    );
+    const { data } = await axios.post(API, { id: id }, { headers: { token } });
     console.log(data);
     if (data?.data) {
       // inverter(true)`
       console.log(data.data, "shdchsc");
       func(data.data);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("actions err>>>", error?.response?.data?.message);
+    dispatch({ type: "user_fail", payload: error?.response?.data?.message });
+  } finally {
+    dispatch({ type: "loading_stop" });
+  }
+};
+export const postNewJob = (postData, func) => async (dispatch) => {
+  try {
+    const API = api + `/postNewJob`;
+    dispatch({ type: "loading_start" });
+    const { data } = await axios.post(API, postData, { headers: { token } });
+    console.log(data);
+    if (data?.data) {
+      // inverter(true)`
+      console.log(data.data, "shdchsc");
+      func();
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("actions err>>>", error?.response?.data?.message);
+    dispatch({ type: "user_fail", payload: error?.response?.data?.message });
+  } finally {
+    dispatch({ type: "loading_stop" });
+  }
+};
+export const getMyCreatedJob = (func) => async (dispatch) => {
+  try {
+    const API = api + `/getMyCreatedJobs`;
+    dispatch({ type: "loading_start" });
+    const { data } = await axios.get(API, { headers: { token } });
+    console.log(data);
+    if (data?.data) {
+      // inverter(true)`
+      console.log(data.data, "shdchsc");
+      func(data?.data);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("actions err>>>", error?.response?.data?.message);
+    dispatch({ type: "user_fail", payload: error?.response?.data?.message });
+  } finally {
+    dispatch({ type: "loading_stop" });
+  }
+};
+export const getJobsNearMe = (func) => async (dispatch) => {
+  try {
+    const API = api + `/getJobs`;
+    dispatch({ type: "loading_start" });
+    const { data } = await axios.post(API,{}, { headers: { token } });
+    console.log(data);
+    if (data?.data) {
+      // inverter(true)`
+      console.log(data.data, "shdchsc");
+      func(data?.data);
     }
   } catch (error) {
     console.log(error);

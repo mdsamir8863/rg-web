@@ -130,7 +130,7 @@ const Routing = () => {
             <Route
               path="/home"
               element={
-                user ? <Navigate to={`/${user.role}/home`} /> : <Frames />
+                user ? <Navigate to={`/${user.role == "seeker"? "jobseeker": user?.role}/home`} /> : <Frames />
               }
             />
             <Route
@@ -250,7 +250,7 @@ const Routing = () => {
             <Route
               path="/student/market"
               element={
-                user && user.role === "student" ? (
+                (user && (user?.role === "student" ||  user?.role === "seeker")) ? (
                   <S_Market setPopUpforEl={setPopUpforEl}/>
                 ) : (
                   <Navigate to={"/home"} />
@@ -290,7 +290,7 @@ const Routing = () => {
             <Route
               path="/s/courses"
               element={
-                user && user.role === "student" ? (
+                (user && (user?.role === "student" || user?.role === "seeker")) ? (
                   <Courses setPopUpforElCB={()=>setPopUpforEl(false)} />
                 ) : (
                   <Navigate to={"/home"} />
@@ -300,7 +300,7 @@ const Routing = () => {
             <Route
               path="/s/library"
               element={
-                user && user.role === "student" ? (
+                (user && (user?.role === "student" || user?.role === "seeker")) ? (
                   <Library setPopUpforElCB={()=>setPopUpforEl(false)} />
                 ) : (
                   <Navigate to={"/home"} />
@@ -519,14 +519,14 @@ const Routing = () => {
               path="/jobseeker/market"
               element={
                 user && user.role === "seeker" ? (
-                  <J_Market />
+                  <J_Market setPopUpforEl={setPopUpforEl}  />
                 ) : (
                   <Navigate to={"/home"} />
                 )
               }
             />
             <Route
-              path="/jobseeker/games"
+              path="/jobseeker/jobs"
               element={
                 user && user.role === "seeker" ? (
                   <J_Jobs />

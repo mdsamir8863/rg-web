@@ -335,7 +335,7 @@ const Navbar = ({ user }) => {
         nav_to: "/hr/Profile",
       },
     ],
-    JobSeeker: [
+    seeker: [
       {
         name: "home",
         role: "home",
@@ -401,8 +401,8 @@ const Navbar = ({ user }) => {
         nav_to: "/jobseeker/market",
       },
       {
-        name: "job-post",
-        role: "job-post",
+        name: "jobs",
+        role: "jobs",
         icon: (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -419,7 +419,7 @@ const Navbar = ({ user }) => {
             />
           </svg>
         ),
-        nav_to: "/jobseeker/job-post",
+        nav_to: "/jobseeker/jobs",
       },
       {
         name: "Profile",

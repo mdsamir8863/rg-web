@@ -82,11 +82,9 @@ const StudentHome = () => {
               />
             </div>
             <div className="relative ">
-              <span className="top-[-10px] right-[-40px] bg-blue-700 text-white rounded-3xl p-1  text-[0.7rem] absolute">
-                Coming soon !!
-              </span>
+              
               <img
-                onClick={() => nav("/coming/soon")}
+                onClick={() => nav("/hr/job-post")}
                 src={publishCourse}
                 className="w-24 cursor-pointer"
                 alt=""

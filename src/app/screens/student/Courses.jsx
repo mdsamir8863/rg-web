@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CourseScreenCard from "../../components/CourseScreenCard";
-import { fetchSearchedCourse } from "../../../store/action";
+import { fetchCourses, fetchSearchedCourse } from "../../../store/action";
 
 const Courses = ({ setPopUpforElCB }) => {
   const { courses } = useSelector((e) => e.studentCoursesReducers);
@@ -18,13 +18,17 @@ const Courses = ({ setPopUpforElCB }) => {
   };
 
   useEffect(() => {
-    setPopUpforElCB();
-    setAllCourses(courses);
-  }, []);
+    if (!courses) {
+      setPopUpforElCB();
+      dispatch(fetchCourses());
+    } else {
+      setPopUpforElCB();
+      setAllCourses(courses);
+    }
+  }, [dispatch, courses]);
 
   return (
     <section className="flex flex-col items-center">
-
       <form onSubmit={handleSubmit} className="w-4/5 mt-10">
         <label
           htmlFor="default-search"
@@ -70,7 +74,11 @@ const Courses = ({ setPopUpforElCB }) => {
       <div className="flex flex-wrap justify-center">
         {allCourses &&
           Object.keys(allCourses).map((e, i) => (
-            <CourseScreenCard key={i} data={allCourses[e]} redirect={"course"} />
+            <CourseScreenCard
+              key={i}
+              data={allCourses[e]}
+              redirect={"course"}
+            />
           ))}
       </div>
     </section>
