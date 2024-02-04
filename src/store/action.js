@@ -495,3 +495,41 @@ export const getJobsNearMe = (func) => async (dispatch) => {
     dispatch({ type: "loading_stop" });
   }
 };
+export const ApplyForJob = (id,func) => async (dispatch) => {
+  try {
+    const API = api + `/applyForJob/${id}`;
+    dispatch({ type: "loading_start" });
+    const { data } = await axios.post(API,{}, { headers: { token } });
+    console.log(data);
+    if (data?.data) {
+      // inverter(true)`
+      console.log(data.data, "shdchsc");
+      func(e=>!e);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("actions err>>>", error?.response?.data?.message);
+    dispatch({ type: "user_fail", payload: error?.response?.data?.message });
+  } finally {
+    dispatch({ type: "loading_stop" });
+  }
+};
+export const GetJobDetails = (id,func) => async (dispatch) => {
+  try {
+    const API = api + `/getJobDetails/${id}`;
+    dispatch({ type: "loading_start" });
+    const { data } = await axios.get(API, { headers: { token } });
+    console.log(data);
+    if (data?.data) {
+      // inverter(true)`
+      console.log(data.data, "shdchsc");
+      func(data?.data);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("actions err>>>", error?.response?.data?.message);
+    dispatch({ type: "user_fail", payload: error?.response?.data?.message });
+  } finally {
+    dispatch({ type: "loading_stop" });
+  }
+};

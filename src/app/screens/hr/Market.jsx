@@ -67,9 +67,9 @@ const Post = () => {
                   <p className="fs12 text-black f">{e?.created_at}</p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <button className="px-2 bg-blue-600 py-1 fs12 text-white rounded">
+                  <Link to={`/hr/response/${e?._id}`} className="px-2 bg-blue-600 py-1 fs12 text-white rounded">
                     {e?.applied.length} Responses
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}

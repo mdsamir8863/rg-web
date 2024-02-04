@@ -18,7 +18,7 @@ const Jobs = () => {
           Recent Openings
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {jobs && jobs.map((e) => <JobsOpenings />)}
+          {jobs && jobs.map((e) => <JobsOpenings key={e._id} data={e}/>)}
         </div>
       </div>
     </>

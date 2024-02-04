@@ -39,9 +39,6 @@ const ComingSoon = lazy(() => import("./app/screens/ComingSoon"));
 const Admission = lazy(() => import("./app/screens/student/Admission"));
 const SCommunity = lazy(() => import("./app/screens/student/SCommunity"));
 
-
-
-
 // Teacher import
 const TeacherHome = lazy(() => import("./app/screens/home/TeacherHome"));
 const Tea_Notifi = lazy(() => import("./app/screens/teacher/Notifi"));
@@ -62,6 +59,7 @@ const Hr_Notifi = lazy(() => import("./app/screens/hr/Notifi"));
 const Hr_Market = lazy(() => import("./app/screens/hr/Market"));
 const Hr_Post = lazy(() => import("./app/screens/hr/Post"));
 const Hr_Profile = lazy(() => import("./app/screens/hr/Profile"));
+const HRResponse = lazy(() => import("./app/screens/hr/Response"));
 
 // job seeker import
 const JobSeekerHome = lazy(() => import("./app/screens/home/JobSeekerHome"));
@@ -82,7 +80,7 @@ const Routing = () => {
   const [loadingComponent, setLoading] = useState(false);
   const { loading } = useSelector((e) => e.loading_reducer);
   const dispatch = useDispatch();
-  const [popUpforEl,setPopUpforEl] = useState(false)
+  const [popUpforEl, setPopUpforEl] = useState(false);
 
   const handleSubjectRedirect = (e) => {
     console.log(e);
@@ -121,7 +119,7 @@ const Routing = () => {
           <Toaster />
         </div>
         {loading || loadingComponent ? <Loader /> : ""}
-       {popUpforEl ? <ElearningPop setPopUpforEl={setPopUpforEl}/> : ''}
+        {popUpforEl ? <ElearningPop setPopUpforEl={setPopUpforEl} /> : ""}
         {preLoading ? <PreLoader /> : ""}
         {!preLoading && user ? <Navbar user={user} /> : ""}
         <Suspense fallback={<Loader />}>
@@ -130,7 +128,15 @@ const Routing = () => {
             <Route
               path="/home"
               element={
-                user ? <Navigate to={`/${user.role == "seeker"? "jobseeker": user?.role}/home`} /> : <Frames />
+                user ? (
+                  <Navigate
+                    to={`/${
+                      user.role == "seeker" ? "jobseeker" : user?.role
+                    }/home`}
+                  />
+                ) : (
+                  <Frames />
+                )
               }
             />
             <Route
@@ -216,7 +222,7 @@ const Routing = () => {
                 )
               }
             />
-      <Route path="/coming/soon" element={user ? <ComingSoon/> :''}/>
+            <Route path="/coming/soon" element={user ? <ComingSoon /> : ""} />
             <Route
               path="/subject/:subject"
               element={
@@ -250,8 +256,9 @@ const Routing = () => {
             <Route
               path="/student/market"
               element={
-                (user && (user?.role === "student" ||  user?.role === "seeker")) ? (
-                  <S_Market setPopUpforEl={setPopUpforEl}/>
+                user &&
+                (user?.role === "student" || user?.role === "seeker") ? (
+                  <S_Market setPopUpforEl={setPopUpforEl} />
                 ) : (
                   <Navigate to={"/home"} />
                 )
@@ -261,7 +268,7 @@ const Routing = () => {
               path="/s/community"
               element={
                 user && user.role === "student" ? (
-                  <SCommunity/>
+                  <SCommunity />
                 ) : (
                   <Navigate to={"/home"} />
                 )
@@ -290,8 +297,9 @@ const Routing = () => {
             <Route
               path="/s/courses"
               element={
-                (user && (user?.role === "student" || user?.role === "seeker")) ? (
-                  <Courses setPopUpforElCB={()=>setPopUpforEl(false)} />
+                user &&
+                (user?.role === "student" || user?.role === "seeker") ? (
+                  <Courses setPopUpforElCB={() => setPopUpforEl(false)} />
                 ) : (
                   <Navigate to={"/home"} />
                 )
@@ -300,8 +308,9 @@ const Routing = () => {
             <Route
               path="/s/library"
               element={
-                (user && (user?.role === "student" || user?.role === "seeker")) ? (
-                  <Library setPopUpforElCB={()=>setPopUpforEl(false)} />
+                user &&
+                (user?.role === "student" || user?.role === "seeker") ? (
+                  <Library setPopUpforElCB={() => setPopUpforEl(false)} />
                 ) : (
                   <Navigate to={"/home"} />
                 )
@@ -320,7 +329,8 @@ const Routing = () => {
             <Route
               path="/library/:id"
               element={
-                user && user.role === "student" ? (
+                user &&
+                (user?.role === "student" || user?.role === "seeker") ? (
                   <SLibrary />
                 ) : (
                   <Navigate to={"/home"} />
@@ -330,7 +340,8 @@ const Routing = () => {
             <Route
               path="/course/:id"
               element={
-                user && user.role === "student" ? (
+                user &&
+                (user?.role === "student" || user?.role === "seeker") ? (
                   <Course />
                 ) : (
                   <Navigate to={"/home"} />
@@ -389,7 +400,7 @@ const Routing = () => {
                 )
               }
             />
-            
+
             {/* Institute screens */}
             <Route
               path="/institute/home"
@@ -493,6 +504,16 @@ const Routing = () => {
                 )
               }
             />
+            <Route
+              path="/hr/response/:id"
+              element={
+                user && user.role === "hr" ? (
+                  <HRResponse />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
 
             {/* Job seeker screens */}
             <Route
@@ -519,7 +540,7 @@ const Routing = () => {
               path="/jobseeker/market"
               element={
                 user && user.role === "seeker" ? (
-                  <J_Market setPopUpforEl={setPopUpforEl}  />
+                  <J_Market setPopUpforEl={setPopUpforEl} />
                 ) : (
                   <Navigate to={"/home"} />
                 )
