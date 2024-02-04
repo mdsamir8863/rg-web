@@ -16,7 +16,6 @@ const Login = () => {
     e.preventDefault();
     dispatch(login_user(email, password));
     // Implement your login logic here based on the selected type
-    console.log(`Logging in`);
   };
 
   return (
@@ -27,7 +26,7 @@ const Login = () => {
         alt="Ranker Guide Logo"
       />
       <div className="grid grid-cols-1">
-        <div className="flex items-center justify-center px-4  sm:px-6 ">
+        <div className="flex items-center flex-col justify-center px-4  sm:px-6 ">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
             <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">
               Login
@@ -72,14 +71,6 @@ const Login = () => {
                       {" "}
                       Password{" "}
                     </label>
-                    <a
-                      href="#"
-                      title=""
-                      className="text-sm font-semibold text-black hover:underline"
-                    >
-                      {" "}
-                      Forgot password?{" "}
-                    </a>
                   </div>
                   <div className="mt-2">
                     <input
@@ -103,6 +94,14 @@ const Login = () => {
               </div>
             </form>
           </div>
+          <a
+            href="https://wa.me/+918553981981"
+            title=""
+            className="text-sm font-semibold text-black hover:underline mt-10"
+          >
+            {" "}
+            Forgot password? .. chat here to recover account
+          </a>
         </div>
       </div>
     </section>

@@ -6,7 +6,6 @@ const token = localStorage.getItem("token");
 export const login_user = (email, password) => async (dispatch) => {
   try {
     const API = api + "/login/user";
-    console.log(API);
     dispatch({ type: "loading_start" });
     const { data } = await axios.post(
       API,
@@ -36,7 +35,7 @@ export const fetch_me = () => async (dispatch) => {
     const API = api + "/user";
     dispatch({ type: "user_request" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       dispatch({ type: "user_success", payload: data.data });
       // data?.token ? localStorage.setItem("token", data?.token) : "";
@@ -59,7 +58,7 @@ export const signUP = (postData, role) => async (dispatch) => {
     const API = api + `/new/${role}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.post(API, postData, { headers: { token } });
-    console.log(data);
+
     if (data?.user) {
       dispatch({ type: "user_success", payload: data.user });
       data?.token ? localStorage.setItem("token", data?.token) : "";
@@ -78,7 +77,7 @@ export const fetchSubjectData = () => async (dispatch) => {
     const API = api + `/allsubjects`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       dispatch({ type: "subjectData", payload: data?.data });
     }
@@ -100,7 +99,7 @@ export const fetchChapter = (subject) => async (dispatch) => {
       { subject: subject },
       { headers: { token } }
     );
-    console.log(data);
+
     return data;
   } catch (error) {
     console.log(error);
@@ -116,7 +115,7 @@ export const fetchCourses = () => async (dispatch) => {
     const API = api + `/allcourses`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       dispatch({ type: "coursesData", payload: data?.data });
     }
@@ -134,7 +133,7 @@ export const fethc_subject = (subject, func) => async (dispatch) => {
     const API = api + `/get/chapter`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.post(API, { subject }, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       dispatch({ type: "subjectChapterData", payload: data?.data });
       func(data?.data);
@@ -153,7 +152,7 @@ export const fetchChapterDetails = (id, func) => async (dispatch) => {
     const API = api + `/subject/chapter/${id}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       func(data?.data);
     }
@@ -170,7 +169,7 @@ export const fetchCourseDetails = (id, func) => async (dispatch) => {
     const API = api + `/get/course/${id}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       func(data?.data);
     }
@@ -188,7 +187,7 @@ export const fetchLibDetails = (id, func) => async (dispatch) => {
     const API = api + `/get/library/${id}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       func(data?.data);
     }
@@ -206,10 +205,10 @@ export const fetchSearchedCourse = (func, inp) => async (dispatch) => {
     const API = api + `/course/${inp}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)
-      console.log(data.data, "shdchsc");
+
       func(data?.data);
     }
   } catch (error) {
@@ -225,10 +224,10 @@ export const fetchSearchLibrary = (func, inp) => async (dispatch) => {
     const API = api + `/library/${inp}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)
-      console.log(data.data, "shdchsc");
+
       func(data?.data);
     }
   } catch (error) {
@@ -245,10 +244,10 @@ export const fetchAllLibrary = (func) => async (dispatch) => {
     const API = api + `/alllibrary`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)
-      console.log(data.data, "shdchsc");
+
       func(data?.data);
     }
   } catch (error) {
@@ -264,10 +263,10 @@ export const fetchAllInst = (func) => async (dispatch) => {
     const API = api + `/get/near/institute`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)
-      console.log(data.data, "shdchsc");
+
       func(data?.data);
     }
   } catch (error) {
@@ -283,9 +282,8 @@ export const fetchAllTeacher = (func) => async (dispatch) => {
     const API = api + `/get/near/teacher`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
-      console.log(data.data, "shdchsc");
       func(data?.data);
     }
   } catch (error) {
@@ -301,10 +299,9 @@ export const AddOnInte = (id, func) => async (dispatch) => {
     const API = api + `/show/inst/${id}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.put(API, {}, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       func((e) => !e);
-      console.log(data.data, "shdchsc");
     }
   } catch (error) {
     console.log(error);
@@ -320,10 +317,10 @@ export const fetchSearchInst = (func, inp) => async (dispatch) => {
     const API = api + `/search/inst/${inp}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)
-      console.log(data.data, "shdchsc");
+
       func(data?.data);
     }
   } catch (error) {
@@ -340,10 +337,10 @@ export const fetchALlLeads = (func) => async (dispatch) => {
     const API = api + `/fetchallleadsa`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)
-      console.log(data.data, "shdchsc");
+
       func(data?.data);
     }
   } catch (error) {
@@ -360,10 +357,10 @@ export const getInstDetailsById = (id, func, invert) => async (dispatch) => {
     const API = api + `/get/inst/${id}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)
-      console.log(data.data, "shdchsc");
+
       func(data?.data);
       invert(true);
     }
@@ -381,10 +378,10 @@ export const followUser = (id, invert) => async (dispatch) => {
     const API = api + `/follow/teacher/${id}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.post(API, {}, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)
-      console.log(data.data, "shdchsc");
+
       invert(true);
     }
   } catch (error) {
@@ -405,10 +402,10 @@ export const finTeacherOnMail = (email, func) => async (dispatch) => {
       { email: email },
       { headers: { token } }
     );
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)
-      console.log(data.data, "shdchsc");
+
       func(data.data);
     }
   } catch (error) {
@@ -424,10 +421,10 @@ export const findStudentFromId = (id, func) => async (dispatch) => {
     const API = api + `/find/student`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.post(API, { id: id }, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)`
-      console.log(data.data, "shdchsc");
+
       func(data.data);
     }
   } catch (error) {
@@ -443,10 +440,10 @@ export const postNewJob = (postData, func) => async (dispatch) => {
     const API = api + `/postNewJob`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.post(API, postData, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)`
-      console.log(data.data, "shdchsc");
+
       func();
     }
   } catch (error) {
@@ -462,10 +459,10 @@ export const getMyCreatedJob = (func) => async (dispatch) => {
     const API = api + `/getMyCreatedJobs`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)`
-      console.log(data.data, "shdchsc");
+
       func(data?.data);
     }
   } catch (error) {
@@ -480,11 +477,11 @@ export const getJobsNearMe = (func) => async (dispatch) => {
   try {
     const API = api + `/getJobs`;
     dispatch({ type: "loading_start" });
-    const { data } = await axios.post(API,{}, { headers: { token } });
-    console.log(data);
+    const { data } = await axios.post(API, {}, { headers: { token } });
+
     if (data?.data) {
       // inverter(true)`
-      console.log(data.data, "shdchsc");
+
       func(data?.data);
     }
   } catch (error) {
@@ -495,16 +492,16 @@ export const getJobsNearMe = (func) => async (dispatch) => {
     dispatch({ type: "loading_stop" });
   }
 };
-export const ApplyForJob = (id,func) => async (dispatch) => {
+export const ApplyForJob = (id, func) => async (dispatch) => {
   try {
     const API = api + `/applyForJob/${id}`;
     dispatch({ type: "loading_start" });
-    const { data } = await axios.post(API,{}, { headers: { token } });
-    console.log(data);
+    const { data } = await axios.post(API, {}, { headers: { token } });
+
     if (data?.data) {
       // inverter(true)`
-      console.log(data.data, "shdchsc");
-      func(e=>!e);
+
+      func((e) => !e);
     }
   } catch (error) {
     console.log(error);
@@ -514,15 +511,15 @@ export const ApplyForJob = (id,func) => async (dispatch) => {
     dispatch({ type: "loading_stop" });
   }
 };
-export const GetJobDetails = (id,func) => async (dispatch) => {
+export const GetJobDetails = (id, func) => async (dispatch) => {
   try {
     const API = api + `/getJobDetails/${id}`;
     dispatch({ type: "loading_start" });
     const { data } = await axios.get(API, { headers: { token } });
-    console.log(data);
+
     if (data?.data) {
       // inverter(true)`
-      console.log(data.data, "shdchsc");
+
       func(data?.data);
     }
   } catch (error) {

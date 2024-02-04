@@ -26,13 +26,13 @@ const StudentForm = ({ setLoading }) => {
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
 
-            console.log("Latitude: " + lat + ", Longitude: " + lon);
+            
 
             const URI = `/api/v1/location?lat=${lat}&lon=${lon}`;
             axios
               .get(URI)
               .then((res) => {
-                console.log(res);
+                
                 const { data } = res;
                 if (data?.data) {
                   const address = data?.data;
@@ -69,7 +69,7 @@ const StudentForm = ({ setLoading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData.address);
+    
     if (!formData.address?.postcode) {
       alert("please fill the information properly");
       return;
@@ -89,7 +89,7 @@ const StudentForm = ({ setLoading }) => {
         address,
       },
     };
-    console.log(signData);
+    
     dispatch(signUP(signData, "teacher"));
   };
 

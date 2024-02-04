@@ -37,6 +37,7 @@ const Course = lazy(() => import("./app/screens/student/Course"));
 const Library = lazy(() => import("./app/screens/student/Library"));
 const ComingSoon = lazy(() => import("./app/screens/ComingSoon"));
 const Admission = lazy(() => import("./app/screens/student/Admission"));
+const Player = lazy(() => import("./app/screens/student/Player"));
 const SCommunity = lazy(() => import("./app/screens/student/SCommunity"));
 
 // Teacher import
@@ -77,14 +78,13 @@ import ElearningPop from "./app/components/ElearningPop";
 const Routing = () => {
   const { user, error } = useSelector((e) => e.user_reducer);
   const [preLoading, setPreLoading] = useState(true);
+  const [playerVideo,setplayerVideo]= useState('')
   const [loadingComponent, setLoading] = useState(false);
   const { loading } = useSelector((e) => e.loading_reducer);
   const dispatch = useDispatch();
   const [popUpforEl, setPopUpforEl] = useState(false);
 
-  const handleSubjectRedirect = (e) => {
-    console.log(e);
-  };
+
 
   useEffect(() => {
     // Simulate a delay for demonstration purposes
@@ -216,7 +216,7 @@ const Routing = () => {
               path="/student/home"
               element={
                 user && user.role === "student" ? (
-                  <StudentHome handleSubjectRedirect={handleSubjectRedirect} />
+                  <StudentHome />
                 ) : (
                   <Navigate to={"/home"} />
                 )
@@ -259,6 +259,17 @@ const Routing = () => {
                 user &&
                 (user?.role === "student" || user?.role === "seeker") ? (
                   <S_Market setPopUpforEl={setPopUpforEl} />
+                ) : (
+                  <Navigate to={"/home"} />
+                )
+              }
+            />
+            <Route
+              path="/player/"
+              element={
+                user &&
+                (user?.role === "student" || user?.role === "seeker") ? (
+                  <Player playerVideo={playerVideo} />
                 ) : (
                   <Navigate to={"/home"} />
                 )
@@ -342,7 +353,7 @@ const Routing = () => {
               element={
                 user &&
                 (user?.role === "student" || user?.role === "seeker") ? (
-                  <Course />
+                  <Course  setplayerVideo={setplayerVideo}/>
                 ) : (
                   <Navigate to={"/home"} />
                 )

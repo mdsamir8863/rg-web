@@ -13,7 +13,7 @@ const Courses = ({ setPopUpforElCB }) => {
 
   const handleSubmit = (r) => {
     r.preventDefault();
-    console.log(searchInput);
+    
     dispatch(fetchSearchedCourse(setAllCourses, searchInput));
   };
 

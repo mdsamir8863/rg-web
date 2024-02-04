@@ -26,7 +26,6 @@ const AdmissionScreenCard = ({ data }) => {
         return;
       }
     }
-    console.log(isINte && instituteTrigger ? "sd" : "sddddd");
   };
 
   useEffect(() => {
@@ -34,7 +33,7 @@ const AdmissionScreenCard = ({ data }) => {
   }, []);
 
   return (
-    <div className="w-full flex gap-10 p-4 my-5 border rounded-lg">
+    <div className="w-full phone:flex-col  flex gap-10 p-4 my-5 border rounded-lg">
       <div className="flex">
         <img
           src="https://static.vecteezy.com/system/resources/thumbnails/022/530/575/small/school-building-exterior-vector-illustration-png.png"
@@ -46,8 +45,8 @@ const AdmissionScreenCard = ({ data }) => {
       <div className="flex flex-col">
         <span className="font-bold ml-5  text-gray-800">{name}</span>
         {isINte && instituteTrigger ? (
-          <div className="flex gap-10 my-2  text-[0.7rem]  w-full p-2">
-            <div className="gap-2 flex  items-center">
+          <div className="flex gap-10 my-2  phone:flex-col phone:gap-2 text-[0.7rem]  w-full p-2">
+            <div className="gap-2 flex phone:w-full  items-center">
               <img
                 className="w-8"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSISbTpVTkE_gFVg5UPKryPA1Mu_irl93iotw&usqp=CAU"
@@ -56,7 +55,7 @@ const AdmissionScreenCard = ({ data }) => {
 
               <span>{institute?.user_details?.s_number}</span>
             </div>
-            <div className="gap-2 flex justify-center items-center">
+            <div className="gap-2 flex justify-center phone:w-full items-center">
               <img
                 className="w-8"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5bSO81s1Owcuft5yFcYivUikC5pFIsYUZhQ&usqp=CAU"
@@ -76,8 +75,8 @@ const AdmissionScreenCard = ({ data }) => {
             </div>
           </div>
         ) : (
-          <div className="flex gap-10 my-2  text-[0.7rem] blur-[3px] w-full p-2">
-            <div className="gap-2 flex  items-center">
+          <div className="flex gap-10 my-2   phone:flex-col text-[0.7rem] blur-[3px] w-full p-2">
+            <div className="gap-2 flex  phone:w-full phone:justify-start items-center">
               <img
                 className="w-8"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSISbTpVTkE_gFVg5UPKryPA1Mu_irl93iotw&usqp=CAU"
@@ -107,7 +106,7 @@ const AdmissionScreenCard = ({ data }) => {
           </div>
         )}
 
-        <div className="flex w-full bg-slate-300 rounded-full  mb-2 ml-5  h-1 "></div>
+        <div className="flex w-full bg-slate-300 rounded-full phone:w-2/3  mb-2 ml-5  h-1 "></div>
         {isINte ? (
           <div className="flex items-center gap-10">
             <button className="bg-blue-700 opacity-45 text-white w-fit text-[0.6rem] px-5 py-2 ml-5  rounded-md ">

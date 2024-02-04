@@ -49,7 +49,7 @@ const Post = () => {
             postedData.map((e) => (
               <div
                 key={e._id}
-                className="flex items-start w-3/4 justify-start gap-2 border py-5 px-2"
+                className="flex items-start phone:w-[90%] w-3/4 justify-start gap-2 border py-5 px-2"
               >
                 <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                   <span class="font-medium text-gray-600 dark:text-gray-300">

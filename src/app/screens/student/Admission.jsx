@@ -14,12 +14,12 @@ const Admission = () => {
 
   const handleSubmit = (r) => {
     r.preventDefault();
-    console.log(searchInput);
+    
     dispatch(fetchSearchInst(setAdmissionData, searchInput));
   };
   return (
     <>
-      <section className="flex flex-col items-center">
+      <section className="flex flex-col phone:mb-20 items-center">
         <div className="flex p-5 w-full gap-5">
           <span>Institute Near You</span>
           <svg

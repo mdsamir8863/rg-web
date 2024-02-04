@@ -12,23 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 const StudentHome = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((e) => e.user_reducer);
-  const nav  = useNavigate()
-  // useEffect(() => {
-  //   if (!subjects) {
-  //     console.log("fetching the subjects >>>");
-  //     dispatch(fetchSubjectData());
-  //     return;
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(courses);
-  //   if (!courses) {
-  //     console.log("fetching the subjects >>>");
-  //     dispatch(fetchCourses());
-  //     return;
-  //   }
-  // }, []);
+  const nav = useNavigate();
 
   useEffect(() => {
     if (!localStorage.getItem("ite")) {
@@ -63,21 +47,34 @@ const StudentHome = () => {
         </div>
         <div className="flex w-full  justify-center flex-col items-center">
           <div className="flex text-2xl font-bold my-10 ">Recent Update</div>
-          <div className="flex  gap-20">
-            <img onClick={()=>nav('/institute/market')} src={admissionApp} className="w-24 cursor-pointer" alt="" />
-            <div className="relative "
-            >
+          <div className="flex phone:flex-col phone:gap-5  gap-20">
+            <img
+              onClick={() => nav("/institute/market")}
+              src={admissionApp}
+              className="w-24 cursor-pointer"
+              alt=""
+            />
+            <div className="relative ">
               <span className="top-[-10px] right-[-40px] bg-blue-700 text-white rounded-3xl p-1  text-[0.7rem] absolute">
                 Coming soon !!
               </span>
-<img onClick={()=>nav('/coming/soon')} src={courseEnrolment} className="w-24 cursor-pointer" alt="" />
+              <img
+                onClick={() => nav("/coming/soon")}
+                src={courseEnrolment}
+                className="w-24 cursor-pointer"
+                alt=""
+              />
             </div>
-            <div className="relative "
-            >
+            <div className="relative ">
               <span className="top-[-10px] right-[-40px] bg-blue-700 text-white rounded-3xl p-1  text-[0.7rem] absolute">
                 Coming soon !!
               </span>
-<img onClick={()=>nav('/coming/soon')} src={publishCourse} className="w-24 cursor-pointer" alt="" />
+              <img
+                onClick={() => nav("/coming/soon")}
+                src={publishCourse}
+                className="w-24 cursor-pointer"
+                alt=""
+              />
             </div>
           </div>
         </div>

@@ -18,19 +18,13 @@ const StudentHome = () => {
 
   useEffect(() => {
     if (!subjects) {
-      console.log("fetching the subjects >>>");
       dispatch(fetchSubjectData());
       return;
     }
   }, []);
 
-
- 
-
   useEffect(() => {
-    console.log(courses);
     if (!courses) {
-      console.log("fetching the subjects >>>");
       dispatch(fetchCourses());
       return;
     }

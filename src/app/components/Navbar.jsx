@@ -553,7 +553,7 @@ const Navbar = ({ user }) => {
     ],
   };
 
-  console.log(user);
+
   return (
     <>
       <nav className="custom w-full sm:px-3 flex justify-center h-16 backdrop-blur-sm  z-40  items-center  shadow-xl phone:bg-transparent text-black ">
@@ -565,7 +565,7 @@ const Navbar = ({ user }) => {
               <Link
                 key={i}
                 to={`${e?.nav_to}`}
-                className={` flex items-center justify-center border rounded px-3 py-1 ${
+                className={` flex items-center first-letter:uppercase justify-center border rounded px-3 py-1 ${
                   activeTab === e.role
                     ? "bg-purple-400 text-white duration-300 "
                     : ""
@@ -583,7 +583,7 @@ const Navbar = ({ user }) => {
             <Link
               key={i}
               to={`${e?.nav_to}`}
-              className={` rounded-full h-12 w-12 flex flex-col items-center justify-center px-3 py-3  border ${
+              className={` rounded-full first-letter:uppercase h-12 w-12 flex flex-col items-center justify-center px-3 py-3  border ${
                 activeTab === e.role
                   ? "bg-purple-400 text-white duration-300 "
                   : ""
@@ -591,7 +591,7 @@ const Navbar = ({ user }) => {
               onClick={() => handleTabClick(e.role)}
             >
               {e.icon}
-              <span className="text-[0.4rem]">{e.name}</span>
+              <span className="text-[0.4rem] first-letter:uppercase">{e.name}</span>
             </Link>
           ))}
         </div>

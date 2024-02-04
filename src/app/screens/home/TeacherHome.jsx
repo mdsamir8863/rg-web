@@ -5,30 +5,13 @@ import courseEnrolment from "../../assets/courseEnrolment.png";
 import publishCourse from "../../assets/publishCourse.png";
 import BabyGirl from "../../assets/ladki.png";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import {  useSelector } from "react-redux";
+import {  useNavigate } from "react-router-dom";
 
-// import MainNavbar from "../../components/MainNavBar";
 const StudentHome = () => {
-  const dispatch = useDispatch();
   const { user } = useSelector((e) => e.user_reducer);
   const nav = useNavigate();
-  // useEffect(() => {
-  //   if (!subjects) {
-  //     console.log("fetching the subjects >>>");
-  //     dispatch(fetchSubjectData());
-  //     return;
-  //   }
-  // }, []);
 
-  // useEffect(() => {
-  //   console.log(courses);
-  //   if (!courses) {
-  //     console.log("fetching the subjects >>>");
-  //     dispatch(fetchCourses());
-  //     return;
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (!localStorage.getItem("ite")) {
@@ -65,7 +48,7 @@ const StudentHome = () => {
           <div className="flex text-2xl font-bold my-10 ">Recent Update</div>
           <div className="flex  gap-20">
             <img
-              onClick={() => nav("/teacher/market")}
+              onClick={() => nav("/teacher/notification")}
               src={admissionApp}
               className="w-24 cursor-pointer"
               alt=""

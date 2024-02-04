@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const CourseScreenCard = ({ data,redirect }) => {
   const { sub, _id, thumbnail, description } = data[0];
 
-  console.log("redirect", redirect)
 
   return (
     <div className="w-80  m-5 bg-white border   border-gray-200 rounded-lg shadow-xl :bg-gray-800 :border-gray-700">

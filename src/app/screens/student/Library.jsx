@@ -11,7 +11,7 @@ const Library = ({ setPopUpforElCB }) => {
 
   const handleSubmit = (r) => {
     r.preventDefault();
-    console.log(searchInput);
+    
     dispatch(fetchSearchLibrary(setAllCourses, searchInput));
   };
 

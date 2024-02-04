@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchCourseDetails } from "../../../store/action";
 
-const Chapter = () => {
+const Chapter = ({setplayerVideo}) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [chapterDetails, setChapterDetails] = useState({});
+  const Navigate  = useNavigate()
 
   useEffect(() => {
     dispatch(fetchCourseDetails(id, setChapterDetails));
   }, []);
+
+  const handlePlayer =(video)=>{
+    setplayerVideo(video)
+    Navigate('/player')
+
+  }
+
 
   return (
     <div className="w-full flex flex-col  items-center">
@@ -76,10 +84,8 @@ const Chapter = () => {
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap .text-white"
                     >
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={e?.video}
+                      <button
+                        onClick={()=>handlePlayer(e?.video)}
                         className="flex w-44  flex-col    justify-center items-center h-24 bg-gray-600 rounded-lg"
                       >
                         <div className="flex w-12 h-12 bg-red-700 text-white justify-center items-center rounded-full ">
@@ -99,7 +105,7 @@ const Chapter = () => {
                           </svg>
                         </div>
                         <span className="text-white">Play</span>
-                      </a>
+                      </button>
                     </th>
                     <th
                       scope="row"

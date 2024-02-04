@@ -15,7 +15,7 @@ const dispatch = useDispatch()
   const handleClick = () => {
     dispatch(ApplyForJob(data._id,setIsApplied))
   };
-  console.log(data);
+
   return (
     <>
       <div className="flex flex-col items-start p-5 m-3 shadow-xl rounded-md gap-3 border">

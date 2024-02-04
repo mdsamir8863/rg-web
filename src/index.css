@@ -1,60 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,100;0,200;0,800;0,900;1,100&family=Mulish:wght@200;300;400;500;600;800&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,500&family=Rubik:wght@300&display=swap");
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 .fadingEffect {
-    animation: fading .5s ease-in-out;
-    transition: .5s ease-in-out;
+  animation: fading 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
 .fadingout {
-    animation: fadingout .5s ease-in-out;
-    transition: .5s ease-in-out;
-
+  animation: fadingout 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
 .mbNav {
-    box-shadow: 0px 0px 15px 4px darkgray;
-
+  box-shadow: 0px 0px 15px 4px darkgray;
 }
 
 @keyframes fading {
+  from {
+    opacity: 0.2;
+    /* transform: scale(.5); */
+  }
 
-    from {
-        opacity: .2;
-        /* transform: scale(.5); */
-    }
-
-    to {
-        opacity: 1;
-        /* transform: scale(1); */
-
-    }
+  to {
+    opacity: 1;
+    /* transform: scale(1); */
+  }
 }
 
 @keyframes fadingout {
+  from {
+    opacity: 1;
+  }
 
-    from {
-        opacity: 1;
-
-    }
-
-    to {
-        opacity: 0;
-
-    }
+  to {
+    opacity: 0;
+  }
 }
 
-.custom{
-    top: 0%;
-    position:fixed;
-
+.custom {
+  top: 0%;
+  position: fixed;
 }
 
-@media (max-width:639px) {
-       .custom{
-        z-index: 999999;
-        position: fixed;
-        top: 90%;
-       }
+@media (max-width: 639px) {
+  .custom {
+    z-index: 999999;
+    position: fixed;
+    top: 90%;
+  }
 }
